@@ -7,6 +7,7 @@ public class FallStone : MonoBehaviour
     float fallSpeed;
     float rotSpeed;
     float rnd;
+    float hp = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,11 @@ public class FallStone : MonoBehaviour
             Destroy(gameObject);
             Debug.Log("きえええええええええええ");
         }
+
+        if (hp <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,8 +41,11 @@ public class FallStone : MonoBehaviour
         {
 
             Debug.Log("ヒット");
+            hp -= 1f;
+            Debug.Log(hp);
+            Destroy(other.gameObject);
 
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 

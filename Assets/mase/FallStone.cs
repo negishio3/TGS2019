@@ -21,6 +21,12 @@ public class FallStone : MonoBehaviour
     {
         transform.Translate(0, -fallSpeed, 0, Space.World);
         transform.Rotate(rotSpeed, -rotSpeed, 0);
+
+        if (transform.position.y<-3.0f)
+        {
+            Destroy(gameObject);
+            Debug.Log("きえええええええええええ");
+        }
     }
 
     private void OnTriggerEnter(Collider other)

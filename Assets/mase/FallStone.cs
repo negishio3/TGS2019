@@ -36,23 +36,23 @@ public class FallStone : MonoBehaviour
 
         if (hp >= 5 && hp<=5)
         {
-            this.gameObject.transform.localScale = new Vector3(2, 2, 2);
+            this.gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         }
         if (hp >= 4 && hp <= 4)
         {
-            this.gameObject.transform.localScale = new Vector3(1.8f, 1.8f, 1.8f);
+            this.gameObject.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
         }
         if (hp >= 3 && hp <= 3)
         {
-            this.gameObject.transform.localScale = new Vector3(1.6f, 1.6f, 1.6f);
+            this.gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
         }
         if (hp >= 2 && hp <= 2)
         {
-            this.gameObject.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+            this.gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
         }
         if (hp >= 1 && hp <= 1)
         {
-            this.gameObject.transform.localScale = new Vector3(1, 1, 1);
+            this.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         }
     }
 

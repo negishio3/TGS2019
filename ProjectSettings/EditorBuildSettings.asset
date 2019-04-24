@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Game.unity
+    path: Assets/Sanoki/Scenes/Game.unity
     guid: 5f78f8c8b09e76946aa8d8a1764fcaf7
   m_configObjects: {}

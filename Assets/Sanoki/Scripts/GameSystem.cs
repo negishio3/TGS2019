@@ -7,7 +7,7 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
     // Start is called before the first frame update
     void Start()
     {
-        
+        Data.earthHP = Data.EarthMaxHP;
     }
 
     // Update is called once per frame
@@ -23,5 +23,15 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
     public void AddScore(int addScore)
     {
         Data.score += addScore;
+    }
+
+    public void EarthDamage(int damage)
+    {
+        Data.earthHP -= damage;
+    }
+
+    public void EarthHeal(int healValue)
+    {
+        Data.earthHP += healValue;
     }
 }

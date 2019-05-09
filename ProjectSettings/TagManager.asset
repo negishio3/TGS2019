@@ -6,8 +6,7 @@ TagManager:
   tags:
   - Bullet
   - Cannon
-  - bullet
-  - Meteo
+  - Cube
   layers:
   - Default
   - TransparentFX

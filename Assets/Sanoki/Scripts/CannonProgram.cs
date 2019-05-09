@@ -26,6 +26,7 @@ public class CannonProgram : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Data.pauseFlg) return;
         PlayerInput();//プレイヤーのInput取得
         Bullet();//弾の生成
     }

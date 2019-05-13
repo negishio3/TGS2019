@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class FallStone : MonoBehaviour
 {
-    float fallSpeed;
-    float rotSpeed;
-    float rnd;
-    float hp = 5;
+    float fallSpeed;//落ちる速度
+    float rotSpeed;//回転速度
+    float rnd;//ランダムの保存先
+    public float hp = 5;//隕石のHP
 
     // Start is called before the first frame update
     void Start()
@@ -32,28 +32,29 @@ public class FallStone : MonoBehaviour
         if (hp <= 0)
         {
             Destroy(gameObject);
+            //hpが0になったら消える
         }
 
-        if (hp >= 5 && hp<=5)
-        {
-            this.gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-        }
-        if (hp >= 4 && hp <= 4)
-        {
-            this.gameObject.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        }
-        if (hp >= 3 && hp <= 3)
-        {
-            this.gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
-        }
-        if (hp >= 2 && hp <= 2)
-        {
-            this.gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-        }
-        if (hp >= 1 && hp <= 1)
-        {
-            this.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        }
+        //if (hp >= 5 && hp<=5)
+        //{
+        //    this.gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        //}
+        //if (hp >= 4 && hp <= 4)
+        //{
+        //    this.gameObject.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+        //}
+        //if (hp >= 3 && hp <= 3)
+        //{
+        //    this.gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
+        //}
+        //if (hp >= 2 && hp <= 2)
+        //{
+        //    this.gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+        //}
+        //if (hp >= 1 && hp <= 1)
+        //{
+        //    this.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        //}
     }
 
     private void OnTriggerEnter(Collider other)
@@ -63,6 +64,7 @@ public class FallStone : MonoBehaviour
 
             Debug.Log("ヒット");
             hp -= 1f;
+            this.gameObject.transform.localScale -= new Vector3(0.3f, 0.3f, 0.3f);
             Debug.Log(hp);
             Destroy(other.gameObject);
 

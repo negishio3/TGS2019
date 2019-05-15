@@ -7,7 +7,7 @@ public class FallStone : MonoBehaviour
     float fallSpeed;//落ちる速度
     float rotSpeed;//回転速度
     float rnd;//ランダムの保存先
-    public float hp = 5;//隕石のHP
+    public int HP_fallstone;//隕石の体力
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +29,7 @@ public class FallStone : MonoBehaviour
             Debug.Log("きえええええええええええ");
         }
 
-        if (hp <= 0)
+        if (HP_fallstone <= 0)
         {
             Destroy(gameObject);
             //hpが0になったら消える
@@ -63,9 +63,9 @@ public class FallStone : MonoBehaviour
         {
 
             Debug.Log("ヒット");
-            hp -= 1f;
+            HP_fallstone -= 1;
             this.gameObject.transform.localScale -= new Vector3(0.3f, 0.3f, 0.3f);
-            Debug.Log(hp);
+            Debug.Log(HP_fallstone);
             Destroy(other.gameObject);
 
             //Destroy(gameObject);

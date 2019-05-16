@@ -14,13 +14,13 @@ public class UFO : MonoBehaviour
     void Start()
     {
         //UFOのオブジェクトの位置情報を代入
-        UFO_pos = transform.position;
+        //UFO_pos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(movespeed, 0, 0, Space.World);
+        transform.Translate(movespeed, -0.01f, 0, Space.World);
         rot_UFO =new Vector3(Mathf.Sin(Time.time*UFO_rotspeed)*SwingRange,UFO_rotspeed*Time.time,0);
         transform.eulerAngles = rot_UFO;
         //Debug.Log(Mathf.Sin(Time.time));
@@ -33,7 +33,7 @@ public class UFO : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        this.gameObject.transform.position = new Vector3(UFO_pos.x, UFO_pos.y + Mathf.PingPong(Time.time, 5), UFO_pos.z);
+        //this.gameObject.transform.position = new Vector3(UFO_pos.x,(UFO_pos.y + Mathf.PingPong(Time.time, 2)), UFO_pos.z);
     }
 
     public void OnTriggerEnter(Collider other)

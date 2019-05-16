@@ -6,16 +6,17 @@ public class MeteorGenerator : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public GameObject meteorPrefab;
+    public GameObject MeteorPrefab;
 
     void Start()
     {
-        InvokeRepeating("meteorpos", 1, 1);
+        InvokeRepeating("Meteorpos", 1, 1);
     }
 
     // Update is called once per frame
-    void meteorpos()
+    void Meteorpos()
     {
-        Instantiate(meteorPrefab, new Vector3(-2.5f + 5 * Random.value, 9, 0), Quaternion.identity);
+        Instantiate(MeteorPrefab, new Vector3(-2.5f + 5 * Random.value, 9, 0), Quaternion.identity);
+        Debug.Log("でた");
     }
 }

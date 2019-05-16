@@ -7,33 +7,33 @@ public class FallStone : MonoBehaviour
     float fallSpeed;//落ちる速度
     float rotSpeed;//回転速度
     float rnd;//ランダムの保存先
-    public int HP_fallstone;//隕石の体力
+    public int HP_fallstone = 3;//隕石の体力
 
     // Start is called before the first frame update
     void Start()
     {
         rnd = Random.value;
-        this.fallSpeed = 0.01f + 0.06f * rnd;
+        //this.fallSpeed = 0.01f + 0.06f * rnd;
         this.rotSpeed = 5f + 3 * rnd;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(0, -fallSpeed, 0, Space.World);
+        //transform.Translate(0, -fallSpeed, 0, Space.World);
         transform.Rotate(rotSpeed, -rotSpeed, 0);
 
-        if (transform.position.y<-3.0f)
-        {
-            Destroy(gameObject);
-            Debug.Log("きえええええええええええ");
-        }
+        //if (transform.position.y<-3.0f)
+        //{
+        //    Destroy(gameObject);
+        //    Debug.Log("きえええええええええええ");
+        //}
 
-        if (HP_fallstone <= 0)
-        {
-            Destroy(gameObject);
-            //hpが0になったら消える
-        }
+        //if (HP_fallstone <= 0)
+        //{
+        //    Destroy(gameObject);
+        //    //hpが0になったら消える
+        //}
 
         //if (hp >= 5 && hp<=5)
         //{
@@ -57,20 +57,20 @@ public class FallStone : MonoBehaviour
         //}
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "bullet")
-        {
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.tag == "bullet")
+    //    {
 
-            Debug.Log("ヒット");
-            HP_fallstone -= 1;
-            this.gameObject.transform.localScale -= new Vector3(0.3f, 0.3f, 0.3f);
-            Debug.Log(HP_fallstone);
-            Destroy(other.gameObject);
+    //        Debug.Log("ヒット");
+    //        HP_fallstone -= 1;
+    //        this.gameObject.transform.localScale -= new Vector3(0.3f, 0.3f, 0.3f);
+    //        Debug.Log(HP_fallstone);
+    //        Destroy(other.gameObject);
 
-            //Destroy(gameObject);
-        }
-    }
+    //        //Destroy(gameObject);
+    //    }
+    //}
 
     //public void OnTriggerEnter(Collider other)
     //{

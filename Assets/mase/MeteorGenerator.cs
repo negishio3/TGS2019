@@ -6,7 +6,8 @@ public class MeteorGenerator : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public GameObject MeteorPrefab;
+    public GameObject MeteorPrefab;//生成するObjectの保管場所
+    bool instanceFlg;
 
     void Start()
     {
@@ -15,11 +16,18 @@ public class MeteorGenerator : MonoBehaviour
 
      void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
-        {
+            //MeteorPrefabの生成
             Instantiate(MeteorPrefab, new Vector3(-2.5f + 5 * Random.value, 9, 0), Quaternion.identity);
+            
             Debug.Log("でた");
-        }
+    }
+
+    void TimeCounter()
+    {
+        instanceFlg = false;
+        float timmer = 0;
+        timmer += Time.deltaTime;
+        instanceFlg = true;
     }
 
     // Update is called once per frame

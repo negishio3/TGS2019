@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class UFO : MonoBehaviour
 {
-    public float movespeed;
-    public int HP_UFO;
+    public float movespeed;//UFOの移動速度
+    public int HP_UFO;//UFOのHP
     float UFO_rotspeed=10;
     float SwingRange = 15;
     Vector3 rot_UFO;
@@ -31,7 +31,7 @@ public class UFO : MonoBehaviour
         //}
         if (HP_UFO<=0)
         {
-            Destroy(gameObject);
+            Destroy(gameObject);//㏋が0になったら消す
         }
         //this.gameObject.transform.position = new Vector3(UFO_pos.x,(UFO_pos.y + Mathf.PingPong(Time.time, 2)), UFO_pos.z);
     }
@@ -41,7 +41,7 @@ public class UFO : MonoBehaviour
         if (other.gameObject.tag == "bullet")
         {
             Debug.Log("fooo");
-            HP_UFO -= 1;
+            HP_UFO -= 1;//弾が当たったらHPを1減らす
             Destroy(other.gameObject);
         }
     }

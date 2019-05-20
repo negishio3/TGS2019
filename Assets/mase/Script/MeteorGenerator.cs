@@ -17,7 +17,7 @@ public class MeteorGenerator : MonoBehaviour
      void Update()
     {
             //MeteorPrefabの生成
-            Instantiate(MeteorPrefab, new Vector3(-2.5f + 5 * Random.value, 9, 0), Quaternion.identity);
+            //Instantiate(MeteorPrefab, new Vector3(-2.5f + 5 * Random.value, 9, 0), Quaternion.identity);
             
             Debug.Log("でた");
     }

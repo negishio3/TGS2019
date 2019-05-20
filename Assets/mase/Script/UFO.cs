@@ -20,11 +20,16 @@ public class UFO : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(movespeed, -0.01f, 0, Space.World);
-        rot_UFO =new Vector3(Mathf.Sin(Time.time*UFO_rotspeed)*SwingRange,UFO_rotspeed*Time.time,0);
+        //transform.Translate(movespeed, -0.01f, 0, Space.World);
+
+        rot_UFO = new Vector3(Mathf.Sin(Time.time*UFO_rotspeed)*SwingRange,UFO_rotspeed*Time.time,0);
         transform.eulerAngles = rot_UFO;
+        transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time, 1), transform.position.z);
+        //float sin = Mathf.Sin(Time.time);
+        //this.transform.position = new Vector3(UFO_pos.x, sin, UFO_pos.z);
         //Debug.Log(Mathf.Sin(Time.time));
         transform.Rotate(0.1f, 0.1f, 0);
+
         //if (transform.position.x<)
         //{
 

@@ -11,6 +11,7 @@ public class UFO : MonoBehaviour,i_Objects
     Vector3 rot_UFO;
     float UFO_pos;
     public int pos;
+    public GameObject Item;
 
         // Start is called before the first frame update
     void Start()
@@ -30,6 +31,7 @@ public class UFO : MonoBehaviour,i_Objects
         transform.position = new Vector3(transform.position.x, UFO_pos+Mathf.PingPong(Time.time, 1), transform.position.z);
         if (HP_UFO<=0)
         {
+            Instantiate(Item, this.gameObject.transform.position);
             Destroy(gameObject);//㏋が0になったら消す
         }
         if (UFO_pos >= 3 )

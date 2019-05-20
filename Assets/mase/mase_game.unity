@@ -130,7 +130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013298462974, guid: 4319efe5996065b41b1ba561c1b9025f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.62
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000013298462974, guid: 4319efe5996065b41b1ba561c1b9025f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -444,6 +444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movespeed: 0.02
   HP_UFO: 3
+  pos: 0
 --- !u!4 &589960265 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000013298462974, guid: 4319efe5996065b41b1ba561c1b9025f,
@@ -460,7 +461,7 @@ Animator:
   m_GameObject: {fileID: 589960263}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 730ed42dcdd7c1045a117dca0ba929aa, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -644,7 +645,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1081086291}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.95, y: 6.45, z: 0.006591797}
+  m_LocalPosition: {x: -5.15, y: 4.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 589960265}

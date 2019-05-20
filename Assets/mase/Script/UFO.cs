@@ -10,26 +10,27 @@ public class UFO : MonoBehaviour
     float SwingRange = 15;
     Vector3 rot_UFO;
     Vector3 UFO_pos;
+    public int pos;
         // Start is called before the first frame update
     void Start()
     {
         //UFOのオブジェクトの位置情報を代入
-        //UFO_pos = transform.position;
+        UFO_pos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //transform.Translate(movespeed, -0.01f, 0, Space.World);
+        transform.Translate(movespeed, -0.01f, 0, Space.World);
 
         rot_UFO = new Vector3(Mathf.Sin(Time.time*UFO_rotspeed)*SwingRange,UFO_rotspeed*Time.time,0);
         transform.eulerAngles = rot_UFO;
-        transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time, 1), transform.position.z);
+        transform.position = new Vector3(transform.position.x, 5+Mathf.PingPong(Time.time, 1), transform.position.z);
         //float sin = Mathf.Sin(Time.time);
         //this.transform.position = new Vector3(UFO_pos.x, sin, UFO_pos.z);
         //Debug.Log(Mathf.Sin(Time.time));
-        transform.Rotate(0.1f, 0.1f, 0);
-
+        //transform.Rotate(0.1f, 0.1f, 0);
+        //transform.position = new Vector3(transform.position.x, 5 + Mathf.Sin(Time.frameCount * 1f), transform.position.z);
         //if (transform.position.x<)
         //{
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoneFall : MonoBehaviour
+public class StoneFall : MonoBehaviour,i_Objects
 {
     float fallSpeed;
     public int HP_fallstone = 3;//隕石の体力
@@ -29,6 +29,7 @@ public class StoneFall : MonoBehaviour
 
         if (HP_fallstone <= 0)
         {
+            GameSystem.Instance.AddScore(100*HP_fallstone);
             Destroy(gameObject);
             //hpが0になったら消える
         }
@@ -39,13 +40,18 @@ public class StoneFall : MonoBehaviour
         if (other.gameObject.tag == "bullet")
         {
 
-            Debug.Log("ヒット");
-            HP_fallstone -= 1;
-            this.gameObject.transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
-            Debug.Log(HP_fallstone);
-            Destroy(other.gameObject);
+            
 
             //Destroy(gameObject);
         }
+    }
+
+    public void IDamage()
+    {
+        Debug.Log("ヒット");
+        HP_fallstone -= 1;
+        this.gameObject.transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
+        Debug.Log(HP_fallstone);
+        //Destroy(other.gameObject);
     }
 }

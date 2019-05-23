@@ -36,7 +36,7 @@ public class UFO : MonoBehaviour,i_Objects
         }
         if (UFO_pos >= 3 )
         {
-            StartCoroutine()
+            //StartCoroutine()
         }
         //this.gameObject.transform.position = new Vector3(UFO_pos.x,(UFO_pos.y + Mathf.PingPong(Time.time, 2)), UFO_pos.z);
     }
@@ -53,5 +53,6 @@ public class UFO : MonoBehaviour,i_Objects
     {
         Debug.Log("fooo");
         HP_UFO -= 1;//弾が当たったらHPを1減らす
+
     }
 }

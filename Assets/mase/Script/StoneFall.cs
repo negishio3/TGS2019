@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StoneFall : MonoBehaviour,i_Objects
 {
+    public float Fall_Max;//落ちる速度の最大
+    public float Fall_Min;//落ちる速度の最小
     float fallSpeed;
     public int HP_fallstone = 3;//隕石の体力
     float rnd;//ランダムの保存先
@@ -12,7 +14,7 @@ public class StoneFall : MonoBehaviour,i_Objects
     void Start()
     {
         rnd = Random.value;
-        this.fallSpeed = 0.01f + 0.06f * rnd;
+        this.fallSpeed = Fall_Min + Fall_Max * rnd;
 
     }
 

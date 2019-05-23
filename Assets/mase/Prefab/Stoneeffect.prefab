@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c559fc956a41c44b952f8c734489255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Fall_Max: 0.5
+  Fall_Min: 0.1
   HP_fallstone: 3
 --- !u!1001 &1406221794037331576
 PrefabInstance:

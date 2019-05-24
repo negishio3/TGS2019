@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c559fc956a41c44b952f8c734489255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Fall_Max: 0.5
-  Fall_Min: 0.1
+  Fall_Max: 0.075
+  Fall_Min: 0.05
   HP_fallstone: 3
 --- !u!1001 &1406221794037331576
 PrefabInstance:
@@ -295,6 +295,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786679327030722201, guid: 08e06515c390245479c6820444d24f9b,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786679327030722201, guid: 08e06515c390245479c6820444d24f9b,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786679327030722201, guid: 08e06515c390245479c6820444d24f9b,
+        type: 3}
+      propertyPath: lengthInSec
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08e06515c390245479c6820444d24f9b, type: 3}

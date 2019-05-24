@@ -15,10 +15,10 @@ public class BackGrandController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(-0.1f, 0, 0);
+        transform.Translate(-0.05f, 0, 0);
         if (transform.position.x < -10f)
         {
-            transform.position = new Vector3(10f, BackGrand_pos, 0);
+            transform.position = new Vector3(10f, BackGrand_pos, 4);
         }
     }
 }

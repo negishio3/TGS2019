@@ -8,6 +8,7 @@ public class MeteorGenerator : MonoBehaviour
 
     public GameObject MeteorPrefab;//生成するObjectの保管場所
     bool instanceFlg;
+    float TimeLeft;
 
     void Start()
     {
@@ -16,10 +17,16 @@ public class MeteorGenerator : MonoBehaviour
 
      void Update()
     {
-            //MeteorPrefabの生成
-            //Instantiate(MeteorPrefab, new Vector3(-2.5f + 5 * Random.value, 9, 0), Quaternion.identity);
-            
+        if (Data.pauseFlg) return;
+        //MeteorPrefabの生成
+        //Instantiate(MeteorPrefab, new Vector3(-2.5f + 5 * Random.value, 9, 0), Quaternion.identity);
+        TimeLeft -= Time.deltaTime;
+        if (TimeLeft <= 0f)
+        {
+            TimeLeft = 1;
+            Instantiate(MeteorPrefab, new Vector3(-2.5f + 5 * Random.value, 9, 0), Quaternion.identity);//生成する
             Debug.Log("でた");
+        }
     }
 
     void TimeCounter()

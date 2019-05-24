@@ -31,7 +31,7 @@ public class UFO : MonoBehaviour,i_Objects
         transform.position = new Vector3(transform.position.x, UFO_pos+Mathf.PingPong(Time.time, 1), transform.position.z);
         if (HP_UFO<=0)
         {
-            Instantiate(Item, this.transform.position, Quaternion.identity);//生成する
+            Instantiate(Item,transform.position, Quaternion.identity);//生成する
             Destroy(gameObject);//㏋が0になったら消す
         }
         if (UFO_pos >= 3 )

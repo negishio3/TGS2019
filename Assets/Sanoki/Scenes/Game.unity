@@ -641,7 +641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09ded4f660e45234b8e266a669e5f675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meteorPrefab: {fileID: 3093821420832798416, guid: 410f47f43e8bb894ab27b54c9092d6cb,
+  MeteorPrefab: {fileID: 3093821420832798416, guid: 410f47f43e8bb894ab27b54c9092d6cb,
     type: 3}
 --- !u!65 &1382653307
 BoxCollider:

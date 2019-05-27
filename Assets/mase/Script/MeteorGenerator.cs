@@ -17,7 +17,7 @@ public class MeteorGenerator : MonoBehaviour
 
      void Update()
     {
-        if (Data.pauseFlg) return;
+        //if (Data.pauseFlg) return;
         //MeteorPrefabの生成
         //Instantiate(MeteorPrefab, new Vector3(-2.5f + 5 * Random.value, 9, 0), Quaternion.identity);
         TimeLeft -= Time.deltaTime;

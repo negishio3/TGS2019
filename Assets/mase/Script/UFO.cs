@@ -41,13 +41,6 @@ public class UFO : MonoBehaviour,i_Objects
         //this.gameObject.transform.position = new Vector3(UFO_pos.x,(UFO_pos.y + Mathf.PingPong(Time.time, 2)), UFO_pos.z);
     }
 
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "bullet")
-        {
-
-        }
-    }
 
     public void IDamage()
     {

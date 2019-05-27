@@ -444,6 +444,94 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8616b50d3229f38459b527f21dc01d4e, type: 3}
+--- !u!1001 &189788722
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2031360989595668673, guid: e300ea2512cfdbb4686d218a203a07e5,
+        type: 3}
+      propertyPath: m_Name
+      value: Stoneeffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565225219862197123, guid: e300ea2512cfdbb4686d218a203a07e5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565225219862197123, guid: e300ea2512cfdbb4686d218a203a07e5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565225219862197123, guid: e300ea2512cfdbb4686d218a203a07e5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565225219862197123, guid: e300ea2512cfdbb4686d218a203a07e5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565225219862197123, guid: e300ea2512cfdbb4686d218a203a07e5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565225219862197123, guid: e300ea2512cfdbb4686d218a203a07e5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565225219862197123, guid: e300ea2512cfdbb4686d218a203a07e5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565225219862197123, guid: e300ea2512cfdbb4686d218a203a07e5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565225219862197123, guid: e300ea2512cfdbb4686d218a203a07e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565225219862197123, guid: e300ea2512cfdbb4686d218a203a07e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565225219862197123, guid: e300ea2512cfdbb4686d218a203a07e5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e300ea2512cfdbb4686d218a203a07e5, type: 3}
+--- !u!1 &189788723 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2031360989595668673, guid: e300ea2512cfdbb4686d218a203a07e5,
+    type: 3}
+  m_PrefabInstance: {fileID: 189788722}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &189788724
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189788723}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &406718179
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,11 +724,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 686005915128617220, guid: 99197a4436450ad4fa792ff76b698f26,
-        type: 3}
-      propertyPath: m_Name
-      value: Boro
-      objectReference: {fileID: 0}
     - target: {fileID: 686005915128617273, guid: 99197a4436450ad4fa792ff76b698f26,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -695,6 +778,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 686005915128617220, guid: 99197a4436450ad4fa792ff76b698f26,
+        type: 3}
+      propertyPath: m_Name
+      value: Boro
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99197a4436450ad4fa792ff76b698f26, type: 3}

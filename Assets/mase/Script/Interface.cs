@@ -2,3 +2,8 @@
 {
     void IDamage();
 }
+
+interface i_item
+{
+    void ItemUse();
+}

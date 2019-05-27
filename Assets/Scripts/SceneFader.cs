@@ -11,7 +11,7 @@ public class SceneFader : MonoBehaviour
 
     float red, green, blue; //RGBを操作するための変数
     public static string next_Scene;//遷移先のシーン名を入れる
-    public static bool isFade = false;//フェード中かどうか
+    public static bool isFade = true;//フェード中かどうか
     int fade;//FadeIn：１ FadeOut：０
 
     public Color fadeColor;//フェード時の色
@@ -94,6 +94,7 @@ public class SceneFader : MonoBehaviour
                     yield return null;//1フレーム待つ
                 }
                 isFade = false;//フェード中状態を解除
+                //Data.pauseFlg = false;
                 break;
         }
     }

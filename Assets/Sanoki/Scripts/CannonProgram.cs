@@ -28,7 +28,7 @@ public class CannonProgram : MonoBehaviour
     {
         if (Data.pauseFlg) return;
         PlayerInput();//プレイヤーのInput取得
-        Bullet();//弾の生成
+        
     }
 
     /// <summary>
@@ -54,6 +54,7 @@ public class CannonProgram : MonoBehaviour
                 //Debug.Log("左");
                 playerDirection.x -= Time.deltaTime * speed;//移動方向＊時間＊速度
             }
+            Bullet();//弾の生成
         }
 
         transform.position = playerDirection;

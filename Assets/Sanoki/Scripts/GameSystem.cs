@@ -8,6 +8,7 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
     public Text scoreText;//スコア用テキスト
     public Text timmerText;//制限時間用テキスト
     SceneFader sf;
+    public Animator ani;
 
     // Start is called before the first frame update
     void Start()
@@ -16,12 +17,14 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
         Data.timmer = 120;
         scoreText.text = "Score:"+Data.score;//表示をリセット
         Data.earthHP = Data.EarthMaxHP;
+        Invoke("Start_Animation", 1.0f);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A)) TimmerStart();
+        //if (Input.GetKeyDown(KeyCode.A)) TimmerStart();
         if (Data.pauseFlg) return;
         if (Input.GetKeyDown(KeyCode.Z))
         {
@@ -61,4 +64,15 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
         }
         timmerText.text = "GameClear!";
     } 
+
+    void Start_Animation()
+    {
+        ani.SetTrigger("GameStart");
+    }
+
+    public void GameStart()
+    {
+        Data.pauseFlg = false;
+        TimmerStart();
+    }
 }

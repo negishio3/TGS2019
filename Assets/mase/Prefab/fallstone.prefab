@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3093821420832798419}
   - component: {fileID: 4973433809238401221}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: fallstone
   m_TagString: Meteo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb21a3815b60936478d23ddfc50d2f9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP_fallstone: 3
 --- !u!54 &4973433809238401221
 Rigidbody:
   m_ObjectHideFlags: 0

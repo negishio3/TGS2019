@@ -9,8 +9,8 @@ public class StoneFall : MonoBehaviour,i_Objects
     float fallSpeed;
     public int HP_fallstone = 3;//隕石の体力
     float rnd;//ランダムの保存先
-    ParticleSystem Damage;//体力が削られたとき
-    ParticleSystem Delete;//デストロイするとき
+    public ParticleSystem Damage;
+
 
     // Start is called before the first frame update
     void Start()
@@ -18,8 +18,6 @@ public class StoneFall : MonoBehaviour,i_Objects
         rnd = Random.value;
         //this.fallSpeed = Fall_Min + Fall_Max * rnd;
         this.fallSpeed = 0.05f + 0.1f * rnd;
-        Damage = this.GetComponent<ParticleSystem>();
-        Damage.Stop();
 
     }
 
@@ -40,6 +38,10 @@ public class StoneFall : MonoBehaviour,i_Objects
             Destroy(gameObject);
             //hpが0になったら消える
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(Damage, transform.position, transform.rotation);
+        }
     }
 
 
@@ -47,7 +49,7 @@ public class StoneFall : MonoBehaviour,i_Objects
     {
         Debug.Log("ヒット");
         HP_fallstone -= 1;
-        Damage.Play();
+        Instantiate(Damage, transform.position, transform.rotation);
         this.gameObject.transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
         Debug.Log(HP_fallstone);
         //Destroy(other.gameObject);

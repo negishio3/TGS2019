@@ -6,25 +6,27 @@ public class MeteorGenerator : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public GameObject MeteorPrefab;//生成するObjectの保管場所
+    public GameObject[] MeteorPrefab;//生成するObjectの保管場所
     bool instanceFlg;
     float TimeLeft;
 
     void Start()
     {
         //InvokeRepeating("Meteorpos", 1, 1);
+        Data.pauseFlg = false;
     }
 
      void Update()
     {
-        if (Data.pauseFlg) return;
+        //if (Data.pauseFlg) return;
         //MeteorPrefabの生成
         //Instantiate(MeteorPrefab, new Vector3(-2.5f + 5 * Random.value, 9, 0), Quaternion.identity);
         TimeLeft -= Time.deltaTime;
         if (TimeLeft <= 0f)
         {
             TimeLeft = 1;
-            Instantiate(MeteorPrefab, new Vector3(-2.5f + 5 * Random.value, 9, 0), Quaternion.identity);//生成する
+            int Meteors = Random.Range(0, MeteorPrefab.Length);//ランダムで選択するよ
+            Instantiate(MeteorPrefab[Meteors], new Vector3(-2.5f + 5 * Random.value, 9, 0), Quaternion.identity);//生成する
             Debug.Log("でた");
         }
     }

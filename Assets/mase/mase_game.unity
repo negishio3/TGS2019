@@ -618,7 +618,6 @@ MonoBehaviour:
   movespeed: 0.02
   HP_UFO: 3
   pos: 0
-  Item: {fileID: 0}
 --- !u!4 &589960265 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000013298462974, guid: 4319efe5996065b41b1ba561c1b9025f,
@@ -644,6 +643,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &922288101 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2601208274194461934, guid: f214a502745d3d949a230ee3ea348541,
+    type: 3}
+  m_PrefabInstance: {fileID: 2601208273357203863}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &922288102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922288101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09ded4f660e45234b8e266a669e5f675, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MeteorPrefab: []
+  ufoFlg: 0
 --- !u!1 &1031356803
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,5 +1181,6 @@ PrefabInstance:
       propertyPath: MeteorPrefab.Array.data[5]
       value: 
       objectReference: {fileID: 100000, guid: 54fa8214a9b2f8e4faed8a953d0cd2b9, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2601208274194461933, guid: f214a502745d3d949a230ee3ea348541, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f214a502745d3d949a230ee3ea348541, type: 3}

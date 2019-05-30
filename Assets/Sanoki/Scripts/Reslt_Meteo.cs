@@ -8,6 +8,15 @@ public class Reslt_Meteo : Result_ObjectMove
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(MoveObj(ResultSystem.Instance.GetFallMeteoPos(), ResultSystem.Instance.GetMeteoBreakPos()));
+        switch(ResultSystem.Instance.GetState())
+        {
+            case ResultSystem.ResultState.RESULT:
+                StartCoroutine(MoveObj(ResultSystem.Instance.GetFallMeteoPos(), ResultSystem.Instance.GetMeteoBreakPos()));
+                break;
+            case ResultSystem.ResultState.RANKING:
+                StartCoroutine(MoveObj(ResultSystem.Instance.GetFallMeteoPos(), ResultSystem.Instance.GetMeteoBreakPos()));
+                break;
+        }
+        
     } 
 }

@@ -10,6 +10,22 @@ public class Result_UI : MonoBehaviour
     void Start()
     {
         scoreText = GetComponent<Text>();
+
         scoreText.text = ResultSystem.Instance.GetRankingScore();
+    }
+
+    void SetText()
+    {
+        switch (ResultSystem.Instance.GetState())
+        {
+            case ResultSystem.ResultState.RESULT:
+
+                break;
+            case ResultSystem.ResultState.RANKING:
+                scoreText.text = ResultSystem.Instance.GetRankingScore();
+                break;
+            default:
+                break;
+        }
     }
 }

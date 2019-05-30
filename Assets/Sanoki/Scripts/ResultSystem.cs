@@ -11,30 +11,35 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     public GameObject scoreUI;// スコア表示のプレハブ
     public GameObject fallMeteo;// 隕石のプレハブ
     public GameObject resultBullet;// 弾丸プレハブ
+    public GameObject[] label;// リザルトのラベル
 
     public Transform[] fallMeteoPos = new Transform[3];// 隕石の開始地点
     public Transform[] scorePos = new Transform[3];// scoreの表示位置
 
-    public Text[] rankingText = new Text[3];// ランキング表示
     int[] ranking = new int[3];// ランキングの保存用
 
     int rankingCount = 0;// ランキングがどこまで表示されたかカウント
 
+    SceneFader sf;
+
+    
+    public enum ResultState{
+        RESULT,
+        RANKING
+    }
+
+    public ResultState state = ResultState.RESULT;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        string[] rankingData = PlayerPrefs.GetString("rankingData", "0,0,0").Split(',');// 保存されているデータを,毎にランキング配列に保存
-
-        // ランキング配列分回す
-        for(int i=0; i < ranking.Length; i++)
-        {
-            ranking[i] = int.Parse(rankingData[i]);// string型をintに変換
-        }
-        Debug.Log("[0]" + ranking[0] + "[1]" + ranking[1] + "[2]" + ranking[2]);// 確認用
-
-        StartCoroutine(RankingCoroutine());
-
+        sf = FindObjectOfType<SceneFader>();
+        RankingUpdate();
+        StartCoroutine(InputWait());
+        Data.pauseFlg = true;
     }
+
 
     // Update is called once per frame
     void Update()
@@ -42,7 +47,7 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            
+            DataReset();
         }
     }
 
@@ -52,6 +57,7 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     /// <param name="score">ソートに使用されるスコア</param>
     void RankingSort(int score)
     {
+        Debug.Log(score);
         // ランキング配列分回す
         for(int i = 0; i < ranking.Length; i++)
         {
@@ -126,8 +132,8 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     /// </summary>
     public void InstanceMeteo()
     {
-        Instantiate(fallMeteo, fallMeteoPos[rankingCount].position, Quaternion.identity);
-        Instantiate(resultBullet, new Vector3(
+        Instantiate(fallMeteo, fallMeteoPos[rankingCount].position, Quaternion.identity);// 隕石の生成
+        Instantiate(resultBullet, new Vector3(// 弾の生成
             GetMeteoBreakPos().x,
             GetMeteoBreakPos().y - 8.0f,
             GetMeteoBreakPos().z
@@ -145,5 +151,68 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
             InstanceMeteo();
             yield return new WaitForSeconds(1.0f);
         }
+    }
+
+    IEnumerator ResultCoroutine()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            InstanceMeteo();
+            yield return new WaitForSeconds(1.0f);
+        }
+    }
+
+    /// <summary>
+    /// ランキングの更新
+    /// </summary>
+    void RankingUpdate()
+    {
+        string[] rankingData = PlayerPrefs.GetString("RankingData", "0,0,0").Split(',');// 保存されているデータを,毎にランキング配列に保存
+
+        // ランキング配列分回す
+        for (int i = 0; i < ranking.Length; i++)
+        {
+            ranking[i] = int.Parse(rankingData[i]);// string型をintに変換
+        }
+        Debug.Log("[0]" + ranking[0] + "[1]" + ranking[1] + "[2]" + ranking[2]);// 確認用
+
+        RankingSort(Data.score);// ランキングのソート
+
+        PlayerPrefs.SetString("RankingData", ranking[0] + "," + ranking[1] + "," + ranking[2]);// データの保存
+    }
+
+    /// <summary>
+    /// タップの入力待機
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator InputWait()
+    {
+        yield return new WaitUntil(Touch);
+        yield return new WaitWhile(Touch);
+        state = ResultState.RANKING;
+        label[0].SetActive(false);
+        label[1].SetActive(true);
+        StartCoroutine(RankingCoroutine());
+        yield return new WaitUntil(Touch);
+        yield return new WaitWhile(Touch);
+        sf.SceneChange("Game");
+    }
+
+    bool Touch()
+    {
+        return Input.GetMouseButtonDown(0);
+    }
+
+    /// <summary>
+    /// ランキングデータのリセット
+    /// </summary>
+    void DataReset()
+    {
+        PlayerPrefs.DeleteKey("RankingData");
+    }
+
+    public ResultState GetState()
+    {
+        return state;
     }
 }

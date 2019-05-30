@@ -8,6 +8,8 @@ TagManager:
   - Cannon
   - Cube
   - Meteo
+  - bullet
+  - TitleLogo
   layers:
   - Default
   - TransparentFX

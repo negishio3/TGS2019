@@ -10,6 +10,7 @@ public class Data : MonoBehaviour
     public static int earthHP;//耐久値
 
     public static float timmer;//制限時間
+    public static int breakMeteoCount;// 壊した隕石カウンター
 
     public static bool pauseFlg = true;//ポーズ用フラグ
 }

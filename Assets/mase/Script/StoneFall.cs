@@ -18,7 +18,7 @@ public class StoneFall : MonoBehaviour,i_Objects
     {
         rnd = Random.value;
         //this.fallSpeed = Fall_Min + Fall_Max * rnd;
-        this.fallSpeed = 0.05f + 0.1f * rnd;
+        this.fallSpeed = 0.03f + 0.05f * rnd;
 
     }
 

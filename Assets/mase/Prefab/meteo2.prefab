@@ -139,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP_fallstone: 2
   Damage: {fileID: 686005915128617222, guid: 99197a4436450ad4fa792ff76b698f26, type: 3}
+  explosion: {fileID: 904113525, guid: 7a9ade9fc6442e14dba05a829ba875ec, type: 3}
 --- !u!135 &4498658975820411455
 SphereCollider:
   m_ObjectHideFlags: 0

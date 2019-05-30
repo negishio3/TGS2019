@@ -7,7 +7,7 @@ public class FallStone : MonoBehaviour
     float fallSpeed;//落ちる速度
     float rotSpeed;//回転速度
     float rnd;//ランダムの保存先
-    public int HP_fallstone = 3;//隕石の体力
+    //public int HP_fallstone = 3;//隕石の体力
 
     // Start is called before the first frame update
     void Start()

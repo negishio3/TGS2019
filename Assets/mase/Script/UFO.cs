@@ -11,7 +11,6 @@ public class UFO : MonoBehaviour,i_Objects
     Vector3 rot_UFO;
     float UFO_pos;
     public int pos;
-    public GameObject Item;//生成するObject
 
         // Start is called before the first frame update
     void Start()
@@ -34,20 +33,14 @@ public class UFO : MonoBehaviour,i_Objects
             Instantiate(Item,transform.position, Quaternion.identity);//生成する
             Destroy(gameObject);//㏋が0になったら消す
         }
-        if (UFO_pos >= 3 )
+        if (transform.position.x >= 12)
         {
             //StartCoroutine()
+            Destroy(gameObject);//自分を消す
         }
         //this.gameObject.transform.position = new Vector3(UFO_pos.x,(UFO_pos.y + Mathf.PingPong(Time.time, 2)), UFO_pos.z);
     }
 
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "bullet")
-        {
-
-        }
-    }
 
     public void IDamage()
     {

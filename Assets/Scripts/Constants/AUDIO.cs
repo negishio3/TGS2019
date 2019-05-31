@@ -3,11 +3,11 @@
 /// </summary>
 public static class AUDIO
 {
-	  public const string BGM_BGM_MAOUDAMASHII_FANTASY13 = "bgm_maoudamashii_fantasy13";
-	  public const string BGM_BGM_MAOUDAMASHII_FANTASY14 = "bgm_maoudamashii_fantasy14";
-	  public const string BGM_BGM_MAOUDAMASHII_FANTASY15 = "bgm_maoudamashii_fantasy15";
+	  public const string BGM_DISENT = "disent";
+	  public const string BGM_DISTANTFUTURE = "distantfuture";
+	  public const string BGM_THEEXPENDABLES = "theexpendables";
 	
-	  public const string SE_SE_MAOUDAMASHII_ONEPOINT31 = "se_maoudamashii_onepoint31";
-	  public const string SE_SE_MAOUDAMASHII_ONEPOINT32 = "se_maoudamashii_onepoint32";
-	  public const string SE_SE_MAOUDAMASHII_ONEPOINT33 = "se_maoudamashii_onepoint33";
+	  public const string SE_SE_MAOUDAMASHII_EXPLOSION03 = "se_maoudamashii_explosion03";
+	  public const string SE_SE_MAOUDAMASHII_EXPLOSION05 = "se_maoudamashii_explosion05";
+	  public const string SE_SE_MAOUDAMASHII_ONEPOINT15 = "se_maoudamashii_onepoint15";
 }

@@ -49,8 +49,8 @@ public static class AudioNameCreator
 
         //指定したパスのリソースを全て取得
         //object[] bgmList = Resources.LoadAll("Audio/BGM");
-        object[] bgmList = Resources.LoadAll("TestMusic/BGM");
-        object[] seList = Resources.LoadAll("TestMusic/SE");
+        object[] bgmList = Resources.LoadAll("Sound/BGM");
+        object[] seList = Resources.LoadAll("Sound/SE");
 
         foreach (AudioClip bgm in bgmList)
         {

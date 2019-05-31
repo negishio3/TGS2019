@@ -35,7 +35,7 @@ public class StoneFall : MonoBehaviour,i_Objects
 
         if (HP_fallstone <= 0)
         {
-            GameSystem.Instance.AddScore(100*HP_fallstone);
+            GameSystem.Instance.AddScore(100);
             Instantiate(explosion, transform.position, transform.rotation);//体力が0になったら再生
             Destroy(gameObject);
             //hpが0になったら消える

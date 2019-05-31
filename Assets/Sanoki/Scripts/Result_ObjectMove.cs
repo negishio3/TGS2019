@@ -18,5 +18,11 @@ public class Result_ObjectMove : MonoBehaviour
         }
 
         transform.position = endPos;
+
+        if (ResultSystem.Instance.GetState() == ResultSystem.ResultState.RESULT)
+        {
+            ResultSystem.Instance.EfectInstance(transform.position);
+            Destroy(gameObject);
+        }
     }
 }

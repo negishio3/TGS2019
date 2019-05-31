@@ -13,4 +13,6 @@ public class Data : MonoBehaviour
     public static int breakMeteoCount;// 壊した隕石カウンター
 
     public static bool pauseFlg = true;//ポーズ用フラグ
+
+    //public static bool stayFlg = true;
 }

@@ -16,13 +16,18 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     public Transform[] fallMeteoPos = new Transform[3];// 隕石の開始地点
     public Transform[] scorePos = new Transform[3];// scoreの表示位置
 
+    public Transform resultFallPos;
+    public Transform[] resultPos = new Transform[2];// リザルトで使用するTransform
+
     int[] ranking = new int[3];// ランキングの保存用
 
     int rankingCount = 0;// ランキングがどこまで表示されたかカウント
 
     SceneFader sf;
 
-    
+    bool stayFlg = true;
+
+    // リザルトシーンのステート
     public enum ResultState{
         RESULT,
         RANKING
@@ -34,10 +39,13 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     // Start is called before the first frame update
     void Start()
     {
-        sf = FindObjectOfType<SceneFader>();
-        RankingUpdate();
-        StartCoroutine(InputWait());
-        Data.pauseFlg = true;
+        stayFlg = true;
+        sf = FindObjectOfType<SceneFader>();// SceneFaderの読み込み
+        RankingUpdate();// ランキングデータの更新
+        StartCoroutine(InputWait());// タップの待機処理
+        Data.pauseFlg = true;// ポーズ中に設定
+
+        Invoke("ResultStart", 1.0f);// リザルトコルーチン
     }
 
 
@@ -47,7 +55,7 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            DataReset();
+            DataReset();// データのリセット
         }
     }
 
@@ -141,6 +149,28 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     }
 
     /// <summary>
+    /// リザルトコルーチンの呼び出し
+    /// </summary>
+    void ResultStart()
+    {
+        StartCoroutine(ResultCoroutine());
+    }
+
+    /// <summary>
+    /// リザルト用コルーチン
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator ResultCoroutine()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            Instantiate(fallMeteo,resultFallPos.position,Quaternion.identity);// 隕石の生成
+            yield return new WaitForSeconds(1.0f);// 1秒待つ
+        }
+        stayFlg = false;
+
+    }
+    /// <summary>
     ///  ランキング用のコルーチン
     /// </summary>
     /// <returns></returns>
@@ -148,19 +178,13 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     {
         for(int i = 0; i < 3; i++)
         {
-            InstanceMeteo();
-            yield return new WaitForSeconds(1.0f);
+            InstanceMeteo();// 隕石の生成
+            yield return new WaitForSeconds(1.0f);// 1秒待つ
         }
+        stayFlg = false;
     }
 
-    IEnumerator ResultCoroutine()
-    {
-        for (int i = 0; i < 2; i++)
-        {
-            InstanceMeteo();
-            yield return new WaitForSeconds(1.0f);
-        }
-    }
+    
 
     /// <summary>
     /// ランキングの更新
@@ -187,14 +211,20 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     /// <returns></returns>
     IEnumerator InputWait()
     {
+     result:
         yield return new WaitUntil(Touch);
-        yield return new WaitWhile(Touch);
-        state = ResultState.RANKING;
+        yield return new WaitWhile(Touch);// タップの待機
+        if (stayFlg) goto result;
+        stayFlg = true;
+        rankingCount = 0;// ランキングカウントのリセット
         label[0].SetActive(false);
         label[1].SetActive(true);
+        state = ResultState.RANKING;
         StartCoroutine(RankingCoroutine());
+     ranking:
         yield return new WaitUntil(Touch);
         yield return new WaitWhile(Touch);
+        if (stayFlg) goto ranking;
         sf.SceneChange("Game");
     }
 
@@ -211,8 +241,42 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
         PlayerPrefs.DeleteKey("RankingData");
     }
 
+    public Vector3 GetResultFallPos()
+    {
+        return resultFallPos.position;
+    }
+
+    public Vector3 GetResultPos()
+    {
+        return resultPos[rankingCount].position;
+    }
+
     public ResultState GetState()
     {
         return state;
+
+    }
+
+    public bool GetStayFlg()
+    {
+        return stayFlg;
+    }
+    
+    public string GetResultText()
+    {
+        string returnText = "";
+
+        rankingCount++;// カウンターをプラス
+        switch (rankingCount - 1)
+        {
+            case 0:
+                returnText = Data.score.ToString();
+                break;
+            case 1:
+                returnText = Data.breakMeteoCount.ToString();
+                break;
+        }
+
+        return returnText;
     }
 }

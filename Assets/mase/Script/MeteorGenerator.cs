@@ -14,12 +14,11 @@ public class MeteorGenerator : MonoBehaviour
     void Start()
     {
         //InvokeRepeating("Meteorpos", 1, 1);
-        Data.pauseFlg = false;
     }
 
      void Update()
     {
-        //if (Data.pauseFlg) return;
+        if (Data.pauseFlg) return;
         //MeteorPrefabの生成
         //Instantiate(MeteorPrefab, new Vector3(-2.5f + 5 * Random.value, 9, 0), Quaternion.identity);
         if (!ufoFlg)
@@ -28,7 +27,7 @@ public class MeteorGenerator : MonoBehaviour
             if (TimeLeft <= 0f)
             {
                 TimeLeft = Random.Range(0.8f, 1.2f);//ランダムで生成する時間の範囲
-                Debug.Log(TimeLeft);
+                //Debug.Log(TimeLeft);
                 int Meteors = Random.Range(0, MeteorPrefab.Length);//ランダムで選択するよ
                 Instantiate(MeteorPrefab[Meteors], new Vector3(-2.5f + 5 * Random.value, 9, 0), Quaternion.identity);//生成する
                 Debug.Log("でた");

@@ -23,7 +23,7 @@ public class UFOGenerator : MonoBehaviour
         CreateTime -= Time.deltaTime;
         if (CreateTime <= 0f)
         {
-             Pos = Random.Range(CreatePos_Left,CreatePos_Right);
+             Pos = Random.Range();
             if ()
             {
 

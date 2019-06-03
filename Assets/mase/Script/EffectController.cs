@@ -18,7 +18,7 @@ public class EffectController : MonoBehaviour
         DeleteTime -= Time.deltaTime;
         if (DeleteTime <= 0f)
         {
-            Debug.Log("消したお");
+            //Debug.Log("消したお");
             Destroy(gameObject);
         }
     }

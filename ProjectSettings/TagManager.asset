@@ -8,6 +8,8 @@ TagManager:
   - Cannon
   - Cube
   - Meteo
+  - bullet
+  - TitleLogo
   layers:
   - Default
   - TransparentFX
@@ -44,4 +46,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: game
+    uniqueID: 3369021999
     locked: 0

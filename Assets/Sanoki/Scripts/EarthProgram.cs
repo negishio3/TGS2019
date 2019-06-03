@@ -5,6 +5,7 @@ using UnityEngine;
 public class EarthProgram : MonoBehaviour
 {
     SceneFader sf;
+    public GameObject explosionEfect;
     private void Start()
     {
         sf = FindObjectOfType<SceneFader>();
@@ -13,6 +14,8 @@ public class EarthProgram : MonoBehaviour
     {
         if (other.tag == "Meteo")
         {
+            Instantiate(explosionEfect, other.transform.position, Quaternion.identity);
+            AudioManager.Instance.PlaySE(AUDIO.SE_SE_MAOUDAMASHII_EXPLOSION05);
             Destroy(other.gameObject);
             GameSystem.Instance.EarthDamage(100);
             if (Data.earthHP <= 0)

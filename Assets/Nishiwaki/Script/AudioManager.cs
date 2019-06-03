@@ -14,8 +14,8 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
     private const float SE_VOLUME_DEFULT = 1.0f;
 
     //オーディオファイルのパス
-    private const string BGM_PATH = "TestMusic/BGM";
-    private const string SE_PATH = "Audio/SE";
+    private const string BGM_PATH = "Sound/BGM";
+    private const string SE_PATH = "Sound/SE";
 
     //BGMがフェードするのにかかる時間
     public const float BGM_FADE_SPEED_RATE_HIGH = 2.0f;

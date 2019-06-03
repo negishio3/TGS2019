@@ -30,13 +30,16 @@ public class StoneFall : MonoBehaviour,i_Objects
         if (transform.position.y < -3.0f)
         {
             Destroy(gameObject);
-            Debug.Log("きえええええええええええ");
+            //Debug.Log("きえええええええええええ");
         }
 
         if (HP_fallstone <= 0)
         {
-            GameSystem.Instance.AddScore(100*HP_fallstone);
+            AudioManager.Instance.PlaySE(AUDIO.SE_SE_MAOUDAMASHII_EXPLOSION05);
+            GameSystem.Instance.AddScore(100);
+            Data.breakMeteoCount++;
             Instantiate(explosion, transform.position, transform.rotation);//体力が0になったら再生
+            
             Destroy(gameObject);
             //hpが0になったら消える
         }

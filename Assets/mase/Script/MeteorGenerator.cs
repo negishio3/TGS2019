@@ -14,12 +14,11 @@ public class MeteorGenerator : SingletonMonoBehaviour<MeteorGenerator>
     void Start()
     {
         //InvokeRepeating("Meteorpos", 1, 1);
-        Data.pauseFlg = false;
     }
 
      void Update()
     {
-        //if (Data.pauseFlg) return;
+        if (Data.pauseFlg) return;
         //MeteorPrefabの生成
         //Instantiate(MeteorPrefab, new Vector3(-2.5f + 5 * Random.value, 9, 0), Quaternion.identity);
         if (!ufoFlg)

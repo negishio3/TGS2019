@@ -11,7 +11,7 @@ public class CannonProgram : MonoBehaviour
     public GameObject bulletPre;//弾のプレハブ
 
     float bulletTime;//弾が生成されてからの時間
-    float bulletInterval = 0.2f;//弾の生成間隔
+    float bulletInterval = 0.1f;//弾の生成間隔
 
     Vector2 minCameraWidth;//カメラの左端座標
     Vector2 maxCameraWidth;//カメラの右端座標
@@ -26,7 +26,7 @@ public class CannonProgram : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Data.pauseFlg) return;
+        //if (Data.pauseFlg) return;
         PlayerInput();//プレイヤーのInput取得
         
     }
@@ -80,7 +80,6 @@ public class CannonProgram : MonoBehaviour
     {
 
        if (bulletTime != 0)return;//インターバル中なら生成せずに終了
-
         Instantiate(bulletPre, bulletInstancePos.transform.position, Quaternion.identity);//弾の生成
         StartCoroutine(IntervalCounter());
     }

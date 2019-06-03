@@ -17,7 +17,12 @@ public class Result_ObjectMove : MonoBehaviour
             yield return null;
         }
 
-        //ResultSystem.Instance.EfectInstance(transform.position);
-        //Destroy(gameObject);
+        transform.position = endPos;
+
+        if (ResultSystem.Instance.GetState() == ResultSystem.ResultState.RESULT)
+        {
+            ResultSystem.Instance.EfectInstance(transform.position);
+            Destroy(gameObject);
+        }
     }
 }

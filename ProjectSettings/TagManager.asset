@@ -10,6 +10,7 @@ TagManager:
   - Meteo
   - bullet
   - TitleLogo
+  - UFO
   layers:
   - Default
   - TransparentFX

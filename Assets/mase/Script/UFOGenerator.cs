@@ -29,6 +29,7 @@ public class UFOGenerator : MonoBehaviour
             CreateTime = 15;
             //int Pos = Random.Range(0,2);
             Instantiate(UfO_obj, new Vector3(-5f, 5f, 0f), Quaternion.identity);
+            MeteorGenerator.Instance.ChangeUFOFlg(true);
             //Debug.Log(Pos);
             //Debug.Log(CreateTime);
             //if (Pos <= 0)
@@ -42,4 +43,5 @@ public class UFOGenerator : MonoBehaviour
             //}
         }
     }
+
 }

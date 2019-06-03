@@ -43,6 +43,10 @@ public class MeteorGenerator : SingletonMonoBehaviour<MeteorGenerator>
         instanceFlg = true;
     }
 
+    public void ChangeUFOFlg(bool flg)
+    {
+        ufoFlg = flg;
+    }
     // Update is called once per frame
     //void Meteorpos()
     //{

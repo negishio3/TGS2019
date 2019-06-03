@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6993379525138445797}
   m_Layer: 0
   m_Name: UFO_Left
-  m_TagString: Untagged
+  m_TagString: UFO
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -330,7 +330,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movespeed: 0.02
   HP_UFO: 3
-  pos: 0
 --- !u!1 &8477279460764967017
 GameObject:
   m_ObjectHideFlags: 0

@@ -80,7 +80,6 @@ public class CannonProgram : MonoBehaviour
     {
 
        if (bulletTime != 0)return;//インターバル中なら生成せずに終了
-
         Instantiate(bulletPre, bulletInstancePos.transform.position, Quaternion.identity);//弾の生成
         StartCoroutine(IntervalCounter());
     }

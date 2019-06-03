@@ -9,7 +9,7 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
 
     public GameObject efectPre;// 隕石が壊れるときのエフェクト
     public GameObject scoreUI;// スコア表示のプレハブ
-    public GameObject fallMeteo;// 隕石のプレハブ
+    public GameObject[] fallMeteo;// 隕石のプレハブ
     public GameObject resultBullet;// 弾丸プレハブ
     public GameObject[] label;// リザルトのラベル
 
@@ -27,6 +27,10 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
 
     bool stayFlg = true;
 
+    //-----------------------
+    List<GameObject> _scoreUI = new List<GameObject>();
+    //-----------------------
+
     // リザルトシーンのステート
     public enum ResultState{
         RESULT,
@@ -39,6 +43,7 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     // Start is called before the first frame update
     void Start()
     {
+        AudioManager.Instance.PlayBGM(AUDIO.BGM_THEEXPENDABLES);
         stayFlg = true;
         sf = FindObjectOfType<SceneFader>();// SceneFaderの読み込み
         RankingUpdate();// ランキングデータの更新
@@ -65,7 +70,6 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     /// <param name="score">ソートに使用されるスコア</param>
     void RankingSort(int score)
     {
-        Debug.Log(score);
         // ランキング配列分回す
         for(int i = 0; i < ranking.Length; i++)
         {
@@ -129,8 +133,9 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     /// <param name="instancePos">生成する座標</param>
     public void EfectInstance(Vector3 instancePos)
     {
+        AudioManager.Instance.PlaySE(AUDIO.SE_SE_MAOUDAMASHII_EXPLOSION05);
         Instantiate(efectPre, instancePos, Quaternion.identity);// エフェクトの生成
-        Instantiate(scoreUI, instancePos, Quaternion.identity);// UIの生成
+        _scoreUI.Add(Instantiate(scoreUI, instancePos, Quaternion.identity));// UIの生成
 
     }
 
@@ -140,7 +145,7 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     /// </summary>
     public void InstanceMeteo()
     {
-        Instantiate(fallMeteo, fallMeteoPos[rankingCount].position, Quaternion.identity);// 隕石の生成
+        Instantiate(fallMeteo[Random.Range(0,2)], fallMeteoPos[rankingCount].position, Quaternion.identity);// 隕石の生成
         Instantiate(resultBullet, new Vector3(// 弾の生成
             GetMeteoBreakPos().x,
             GetMeteoBreakPos().y - 8.0f,
@@ -164,7 +169,7 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     {
         for (int i = 0; i < 2; i++)
         {
-            Instantiate(fallMeteo,resultFallPos.position,Quaternion.identity);// 隕石の生成
+            Instantiate(fallMeteo[Random.Range(0,2)],resultFallPos.position,Quaternion.identity);// 隕石の生成
             yield return new WaitForSeconds(1.0f);// 1秒待つ
         }
         stayFlg = false;
@@ -198,7 +203,7 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
         {
             ranking[i] = int.Parse(rankingData[i]);// string型をintに変換
         }
-        Debug.Log("[0]" + ranking[0] + "[1]" + ranking[1] + "[2]" + ranking[2]);// 確認用
+        //Debug.Log("[0]" + ranking[0] + "[1]" + ranking[1] + "[2]" + ranking[2]);// 確認用
 
         RankingSort(Data.score);// ランキングのソート
 
@@ -215,12 +220,14 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
         yield return new WaitUntil(Touch);
         yield return new WaitWhile(Touch);// タップの待機
         if (stayFlg) goto result;
-        stayFlg = true;
+        DeleteScoreUI();
         rankingCount = 0;// ランキングカウントのリセット
         label[0].SetActive(false);
         label[1].SetActive(true);
         state = ResultState.RANKING;
         StartCoroutine(RankingCoroutine());
+        
+        SetFlg();
      ranking:
         yield return new WaitUntil(Touch);
         yield return new WaitWhile(Touch);
@@ -231,6 +238,11 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     bool Touch()
     {
         return Input.GetMouseButtonDown(0);
+    }
+
+    public void SetFlg()
+    {
+        stayFlg = true;
     }
 
     /// <summary>
@@ -278,5 +290,15 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
         }
 
         return returnText;
+    }
+
+    void DeleteScoreUI()
+    {
+        for (int i = 0; i < _scoreUI.Count; i++)
+        {
+            Destroy(_scoreUI[i]);
+        }
+
+        _scoreUI.Clear();
     }
 }

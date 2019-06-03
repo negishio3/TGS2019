@@ -18,6 +18,7 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
     // Start is called before the first frame update
     void Start()
     {
+        AudioManager.Instance.PlayBGM(AUDIO.BGM_THEEXPENDABLES);
         sf = FindObjectOfType<SceneFader>();
         Data.timmer = 120;
         scoreText.text = "Score:"+Data.score;//表示をリセット
@@ -33,7 +34,7 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
         if (Data.pauseFlg) return;
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            AddTime(5);
+            //AddTime(5);
             //Debug.Log("SCORE : "+Data.score);
         }
     }

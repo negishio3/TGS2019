@@ -1012,7 +1012,7 @@ RectTransform:
   - {fileID: 90313339}
   - {fileID: 1557549740}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1511,7 +1511,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29327bd697bbc4547aa65c829534aec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UfO_obj: {fileID: 351324317078265260, guid: 3c1bcc40f0e0923468b2091ddb525f25, type: 3}
+  UFOobj_Left: {fileID: 351324317078265260, guid: 3c1bcc40f0e0923468b2091ddb525f25,
+    type: 3}
+  UFOobj_Right: {fileID: 3159677402817580634, guid: ad7c1864a4ed9d2439681a71001e43d1,
+    type: 3}
 --- !u!1 &1404433987
 GameObject:
   m_ObjectHideFlags: 0
@@ -2432,7 +2435,7 @@ PrefabInstance:
     - target: {fileID: 7688556338280037843, guid: 785666cce606439429fabaee6eddd134,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7688556338280037843, guid: 785666cce606439429fabaee6eddd134,
         type: 3}

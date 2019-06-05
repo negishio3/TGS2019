@@ -26,6 +26,7 @@ public class UFOGenerator : MonoBehaviour
         CreateTime -= Time.deltaTime;
         if (CreateTime <= 0f)
         {
+            AudioManager.Instance.PlaySE(AUDIO.SE_UFO01);
             CreateTime = 15;
             int Pos = Random.Range(0, 2);
             //Instantiate(UfO_obj, new Vector3(-5f, 5f, 0f), Quaternion.identity);

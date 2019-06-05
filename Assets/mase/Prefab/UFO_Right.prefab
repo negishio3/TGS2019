@@ -9,6 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3159677402817580637}
+  - component: {fileID: 5372440291572950104}
+  - component: {fileID: 9013295229788019621}
+  - component: {fileID: 509961758649888310}
   m_Layer: 0
   m_Name: UFO_Right
   m_TagString: UFO
@@ -31,6 +34,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &5372440291572950104
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3159677402817580634}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!135 &9013295229788019621
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3159677402817580634}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &509961758649888310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3159677402817580634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4fda6a31b2fe02498af5592f4618d93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movespeed: 0.02
+  HP_UFO: 3
 --- !u!95 &3159677401154145091
 Animator:
   serializedVersion: 3
@@ -50,20 +96,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3159677401154145089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3160084767814092502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4fda6a31b2fe02498af5592f4618d93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movespeed: 0.02
-  HP_UFO: 3
 --- !u!1001 &3159677401691430642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71,6 +103,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3159677402817580637}
     m_Modifications:
+    - target: {fileID: 1000011480111140, guid: 4319efe5996065b41b1ba561c1b9025f, type: 3}
+      propertyPath: m_Name
+      value: the ufo
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013298462974, guid: 4319efe5996065b41b1ba561c1b9025f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -126,10 +162,6 @@ PrefabInstance:
     - target: {fileID: 4000013298462974, guid: 4319efe5996065b41b1ba561c1b9025f, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000011480111140, guid: 4319efe5996065b41b1ba561c1b9025f, type: 3}
-      propertyPath: m_Name
-      value: the ufo
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4319efe5996065b41b1ba561c1b9025f, type: 3}

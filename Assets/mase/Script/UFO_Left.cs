@@ -22,21 +22,24 @@ public class UFO_Left : MonoBehaviour, i_Objects
     void Update()
     {
         //hidariに移動
-        transform.Translate(movespeed, +0.01f, 0, Space.World);
+        transform.Translate(movespeed, 0.01f, 0, Space.World);
         rot_UFO = new Vector3(Mathf.Sin(Time.time * UFO_rotspeed) * SwingRange, UFO_rotspeed * Time.time, 0);
         transform.eulerAngles = rot_UFO;
         //上下移動
         transform.position = new Vector3(transform.position.x, UFO_pos + Mathf.PingPong(Time.time, 1), transform.position.z);
         if (HP_UFO <= 0)
         {
+            MeteorGenerator.Instance.ChangeUFOFlg(false);
             //Instantiate(Item,transform.position, Quaternion.identity);//生成する
             Destroy(gameObject);//㏋が0になったら消す
         }
-        if (transform.position.x >= 12)
+        if (transform.position.x >= 5)
         {
+            MeteorGenerator.Instance.ChangeUFOFlg(false);
             //StartCoroutine()
             Destroy(gameObject);//自分を消す
         }
+
         //this.gameObject.transform.position = new Vector3(UFO_pos.x,(UFO_pos.y + Mathf.PingPong(Time.time, 2)), UFO_pos.z);
     }
 

@@ -17,7 +17,7 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     public Transform[] scorePos = new Transform[3];// scoreの表示位置
 
     public Transform resultFallPos;
-    public Transform[] resultPos = new Transform[2];// リザルトで使用するTransform
+    public Transform[] resultPos = new Transform[3];// リザルトで使用するTransform
 
     int[] ranking = new int[3];// ランキングの保存用
 
@@ -167,9 +167,9 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     /// <returns></returns>
     IEnumerator ResultCoroutine()
     {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < resultPos.Length; i++)
         {
-            Instantiate(fallMeteo[Random.Range(0,2)],resultFallPos.position,Quaternion.identity);// 隕石の生成
+            Instantiate(fallMeteo[Random.Range(0, 2)], resultFallPos.position, Quaternion.identity);// 隕石の生成
             yield return new WaitForSeconds(1.0f);// 1秒待つ
         }
         stayFlg = false;
@@ -181,7 +181,7 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     /// <returns></returns>
     IEnumerator RankingCoroutine()
     {
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < ranking.Length; i++)
         {
             InstanceMeteo();// 隕石の生成
             yield return new WaitForSeconds(1.0f);// 1秒待つ
@@ -286,6 +286,9 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
                 break;
             case 1:
                 returnText = Data.breakMeteoCount.ToString();
+                break;
+            case 2:
+                returnText = Data.breakUFOCount.ToString();
                 break;
         }
 

@@ -37,7 +37,6 @@ public class BulletProgram : MonoBehaviour
         if (other.tag == "Meteo")
         {
             HP_Bullet--;
-            Debug.Log("触れた");
             Instantiate(damageEfect, transform.position, Quaternion.identity);
             other.GetComponent<i_Objects>().IDamage();
             AudioManager.Instance.PlaySE(AUDIO.SE_SE_MAOUDAMASHII_EXPLOSION03);
@@ -50,6 +49,11 @@ public class BulletProgram : MonoBehaviour
             AudioManager.Instance.PlaySE(AUDIO.SE_SE_MAOUDAMASHII_EXPLOSION03);
             Destroy(gameObject);
         }
-        
+        if (other.tag == "UFO")
+        {
+            other.GetComponent<i_Objects>().IDamage();
+            AudioManager.Instance.PlaySE(AUDIO.SE_SE_MAOUDAMASHII_EXPLOSION03);
+            Destroy(gameObject);
+        }
     }
 }

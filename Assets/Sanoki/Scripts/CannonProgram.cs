@@ -44,12 +44,12 @@ public class CannonProgram : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             //マウスの座標まで移動
-            if(transform.position.x + transform.localScale.x <= Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
+            if(transform.position.x + transform.localScale.x/2 <= Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
             {
                 //Debug.Log("右");
                 playerDirection.x += Time.deltaTime * speed;//移動方向＊時間＊速度
             }
-            else if(transform.position.x - transform.localScale.x >= Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
+            else if(transform.position.x - transform.localScale.x/2 >= Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
             {
                 //Debug.Log("左");
                 playerDirection.x -= Time.deltaTime * speed;//移動方向＊時間＊速度
@@ -60,13 +60,13 @@ public class CannonProgram : MonoBehaviour
         transform.position = playerDirection;
 
         //画面外に行かないようにする
-        if(transform.position.x >= maxCameraWidth.x - transform.localScale.x)
+        if(transform.position.x >= maxCameraWidth.x - transform.localScale.x/2)
         {
-            transform.position = new Vector3(maxCameraWidth.x - transform.localScale.x, transform.position.y);
+            transform.position = new Vector3(maxCameraWidth.x - transform.localScale.x/2, transform.position.y);
         }
-        else if (transform.position.x <= minCameraWidth.x + transform.localScale.x)
+        else if (transform.position.x <= minCameraWidth.x + transform.localScale.x/2)
         {
-            transform.position = new Vector3(minCameraWidth.x + transform.localScale.x, transform.position.y);
+            transform.position = new Vector3(minCameraWidth.x + transform.localScale.x/2, transform.position.y);
         }
     }
 

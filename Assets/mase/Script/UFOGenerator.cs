@@ -12,12 +12,16 @@ public class UFOGenerator : MonoBehaviour
     //public GameObject UfO_obj;
     GameObject Pos;
     int POS = 1;
+    public GameObject Arrow_Right;
+    public GameObject Arrow_Left;
+    float LifeTime;
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        Arrow_Left.SetActive(false);
+        Arrow_Right.SetActive(false);
     }
 
     // Update is called once per frame
@@ -36,13 +40,24 @@ public class UFOGenerator : MonoBehaviour
             //Debug.Log(CreateTime);
             if (Pos <= 0)
             {
+
                 Instantiate(UFOobj_Left, new Vector3(5f, 5f, 0f), Quaternion.identity);
+                Arrow_Left.SetActive(true);
+                LifeTime = 1.5f;
             }
             if (Pos >= 1)
             {
+
                 Instantiate(UFOobj_Right, new Vector3(-5f, 5f, 0f), Quaternion.identity);
-                Debug.Log("北");
+                Arrow_Right.SetActive(true);
+                LifeTime = 1.5f;
             }
+        }
+        LifeTime -= Time.deltaTime;
+        if (LifeTime <= 0)
+        {
+            Arrow_Left.SetActive(false);
+            Arrow_Right.SetActive(false);
         }
     }
 

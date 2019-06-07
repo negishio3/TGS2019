@@ -29,11 +29,14 @@ public class UFO : MonoBehaviour,i_Objects
         transform.position = new Vector3(transform.position.x, UFO_pos+Mathf.PingPong(Time.time, 1), transform.position.z);
         if (HP_UFO<=0)
         {
+            MeteorGenerator.Instance.ChangeUFOFlg(false);
+            Data.breakUFOCount++;
             //Instantiate(Item,transform.position, Quaternion.identity);//生成する
             Destroy(gameObject);//㏋が0になったら消す
         }
         if (transform.position.x >= 12)
         {
+            MeteorGenerator.Instance.ChangeUFOFlg(false);
             //StartCoroutine()
             Destroy(gameObject);//自分を消す
         }

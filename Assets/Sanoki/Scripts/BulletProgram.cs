@@ -51,6 +51,7 @@ public class BulletProgram : MonoBehaviour
         }
         if (other.tag == "UFO")
         {
+            Instantiate(damageEfect, transform.position, Quaternion.identity);
             other.GetComponent<i_Objects>().IDamage();
             AudioManager.Instance.PlaySE(AUDIO.SE_SE_MAOUDAMASHII_EXPLOSION03);
             Destroy(gameObject);

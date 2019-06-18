@@ -27,6 +27,7 @@ public class UFOGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Data.pauseFlg) return;
         CreateTime -= Time.deltaTime;
         if (CreateTime <= 0f)
         {

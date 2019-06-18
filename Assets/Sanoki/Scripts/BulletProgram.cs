@@ -27,6 +27,7 @@ public class BulletProgram : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Data.pauseFlg) return;
         bulletPos.y += Time.deltaTime * speed;//弾の移動の計算
 
         transform.position = bulletPos;//移動
@@ -37,7 +38,6 @@ public class BulletProgram : MonoBehaviour
         if (other.tag == "Meteo")
         {
             HP_Bullet--;
-            Debug.Log("触れた");
             Instantiate(damageEfect, transform.position, Quaternion.identity);
             other.GetComponent<i_Objects>().IDamage();
             AudioManager.Instance.PlaySE(AUDIO.SE_SE_MAOUDAMASHII_EXPLOSION03);
@@ -50,6 +50,12 @@ public class BulletProgram : MonoBehaviour
             AudioManager.Instance.PlaySE(AUDIO.SE_SE_MAOUDAMASHII_EXPLOSION03);
             Destroy(gameObject);
         }
-        
+        if (other.tag == "UFO")
+        {
+            Instantiate(damageEfect, transform.position, Quaternion.identity);
+            other.GetComponent<i_Objects>().IDamage();
+            AudioManager.Instance.PlaySE(AUDIO.SE_SE_MAOUDAMASHII_EXPLOSION03);
+            Destroy(gameObject);
+        }
     }
 }

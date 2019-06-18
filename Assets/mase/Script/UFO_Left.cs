@@ -30,6 +30,7 @@ public class UFO_Left : MonoBehaviour, i_Objects
         if (HP_UFO <= 0)
         {
             MeteorGenerator.Instance.ChangeUFOFlg(false);
+            Data.breakUFOCount++;
             //Instantiate(Item,transform.position, Quaternion.identity);//生成する
             Destroy(gameObject);//㏋が0になったら消す
         }

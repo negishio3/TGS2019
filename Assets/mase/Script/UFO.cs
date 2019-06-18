@@ -21,6 +21,7 @@ public class UFO : MonoBehaviour,i_Objects
     // Update is called once per frame
     void Update()
     {
+        if (Data.pauseFlg) return;
         //右に移動
         transform.Translate(movespeed, -0.01f, 0, Space.World);
         rot_UFO = new Vector3(Mathf.Sin(Time.time*UFO_rotspeed)*SwingRange,UFO_rotspeed*Time.time,0);
@@ -29,11 +30,14 @@ public class UFO : MonoBehaviour,i_Objects
         transform.position = new Vector3(transform.position.x, UFO_pos+Mathf.PingPong(Time.time, 1), transform.position.z);
         if (HP_UFO<=0)
         {
+            MeteorGenerator.Instance.ChangeUFOFlg(false);
+            Data.breakUFOCount++;
             //Instantiate(Item,transform.position, Quaternion.identity);//生成する
             Destroy(gameObject);//㏋が0になったら消す
         }
         if (transform.position.x >= 12)
         {
+            MeteorGenerator.Instance.ChangeUFOFlg(false);
             //StartCoroutine()
             Destroy(gameObject);//自分を消す
         }

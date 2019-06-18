@@ -26,7 +26,7 @@ public class CannonProgram : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Data.pauseFlg) return;
+        if (Data.pauseFlg) return;
         PlayerInput();//プレイヤーのInput取得
         
     }
@@ -39,34 +39,44 @@ public class CannonProgram : MonoBehaviour
         //playerDirection.x = Input.GetAxis("Horizontal");//とりあえず左右キーで移動
 
         //transform.position += playerDirection * Time.deltaTime * speed;//移動方向＊時間＊速度
-
-        //マウスの左クリックが押されている間
-        if (Input.GetMouseButton(0))
+        if (Data.gyroFlg)
         {
-            //マウスの座標まで移動
-            if(transform.position.x + transform.localScale.x <= Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
+            Quaternion gyro = Input.gyro.attitude;
+            Quaternion action_gyro 
+                = Quaternion.Euler(90, 0, 0) * (new Quaternion(-gyro.x, -gyro.y, gyro.z, gyro.w));
+            playerDirection.x = action_gyro.x;
+        }
+        else if (!Data.gyroFlg)
+        {
+            //マウスの左クリックが押されている間
+            if (Input.GetMouseButton(0))
             {
-                //Debug.Log("右");
-                playerDirection.x += Time.deltaTime * speed;//移動方向＊時間＊速度
+                //マウスの座標まで移動
+                if (transform.position.x + transform.localScale.x / 2 <= Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
+                {
+                    //Debug.Log("右");
+                    playerDirection.x += Time.deltaTime * speed;//移動方向＊時間＊速度
+                }
+                else if (transform.position.x - transform.localScale.x / 2 >= Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
+                {
+                    //Debug.Log("左");
+                    playerDirection.x -= Time.deltaTime * speed;//移動方向＊時間＊速度
+                }
+                
             }
-            else if(transform.position.x - transform.localScale.x >= Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
-            {
-                //Debug.Log("左");
-                playerDirection.x -= Time.deltaTime * speed;//移動方向＊時間＊速度
-            }
-            Bullet();//弾の生成
         }
 
+        Bullet();//弾の生成
         transform.position = playerDirection;
 
         //画面外に行かないようにする
-        if(transform.position.x >= maxCameraWidth.x - transform.localScale.x)
+        if(transform.position.x >= maxCameraWidth.x - transform.localScale.x/2)
         {
-            transform.position = new Vector3(maxCameraWidth.x - transform.localScale.x, transform.position.y);
+            transform.position = new Vector3(maxCameraWidth.x - transform.localScale.x/2, transform.position.y);
         }
-        else if (transform.position.x <= minCameraWidth.x + transform.localScale.x)
+        else if (transform.position.x <= minCameraWidth.x + transform.localScale.x/2)
         {
-            transform.position = new Vector3(minCameraWidth.x + transform.localScale.x, transform.position.y);
+            transform.position = new Vector3(minCameraWidth.x + transform.localScale.x/2, transform.position.y);
         }
     }
 
@@ -80,8 +90,11 @@ public class CannonProgram : MonoBehaviour
     {
 
        if (bulletTime != 0)return;//インターバル中なら生成せずに終了
-        Instantiate(bulletPre, bulletInstancePos.transform.position, Quaternion.identity);//弾の生成
-        StartCoroutine(IntervalCounter());
+        if (Input.GetMouseButton(0))
+        {
+            Instantiate(bulletPre, bulletInstancePos.transform.position, Quaternion.identity);//弾の生成
+            StartCoroutine(IntervalCounter());
+        }
     }
 
     /// <summary>

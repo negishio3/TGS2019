@@ -13,5 +13,6 @@ public class Data : MonoBehaviour
     public static int breakMeteoCount;// 壊した隕石カウンター
     public static int breakUFOCount;// 壊したUFOカウンター
 
+    public static bool gyroFlg = true;// ジャイロ操作を実行するフラグ
     public static bool pauseFlg = true;//ポーズ用フラグ
 }

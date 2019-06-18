@@ -27,6 +27,7 @@ public class BulletProgram : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Data.pauseFlg) return;
         bulletPos.y += Time.deltaTime * speed;//弾の移動の計算
 
         transform.position = bulletPos;//移動

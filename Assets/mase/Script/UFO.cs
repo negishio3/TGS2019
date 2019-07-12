@@ -6,7 +6,7 @@ public class UFO : MonoBehaviour,i_Objects
 {
     public float movespeed;//UFOの移動速度
     public int HP_UFO;//UFOのHP
-    float UFO_rotspeed=10;
+    float UFO_rotspeed = 10;
     float SwingRange = 15;
     Vector3 rot_UFO;
     float UFO_pos;
@@ -47,7 +47,7 @@ public class UFO : MonoBehaviour,i_Objects
 
     public void IDamage()
     {
-        Debug.Log("fooo");
+        //Debug.Log("fooo");
         HP_UFO -= 1;//弾が当たったらHPを1減らす
 
     }

@@ -16,9 +16,16 @@ public class CannonProgram : MonoBehaviour
     Vector2 minCameraWidth;//カメラの左端座標
     Vector2 maxCameraWidth;//カメラの右端座標
 
+    Vector3 acacceleration;// 端末の傾き具合
+
+    bool longTap = false;// 長押しフラグ
+    float tapTime = 0.0f;// 長押し時間
+    const float LONG_TAP_TIME = 0.1f;// 長押しの判定(時間)
+
     // Start is called before the first frame update
     void Start()
     {
+        // 画面両端の座標を取得
         minCameraWidth = Camera.main.ViewportToWorldPoint(Vector2.zero);
         maxCameraWidth = Camera.main.ViewportToWorldPoint(Vector2.one);
     }
@@ -26,9 +33,15 @@ public class CannonProgram : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButton(0)) LongTapCheck();// 長押しのチェック開始
+        if (Input.GetMouseButtonUp(0))// 指を話したとき
+        {
+            longTap = false;// 長押しフラグをオフに
+            tapTime = 0.0f;// 長押し時間をリセット
+        }
+
         if (Data.pauseFlg) return;
         PlayerInput();//プレイヤーのInput取得
-        
     }
 
     /// <summary>
@@ -36,38 +49,23 @@ public class CannonProgram : MonoBehaviour
     /// </summary>
     void PlayerInput()
     {
-        //playerDirection.x = Input.GetAxis("Horizontal");//とりあえず左右キーで移動
-
-        //transform.position += playerDirection * Time.deltaTime * speed;//移動方向＊時間＊速度
         if (Data.gyroFlg)
         {
-            Quaternion gyro = Input.gyro.attitude;
-            Quaternion action_gyro 
-                = Quaternion.Euler(90, 0, 0) * (new Quaternion(-gyro.x, -gyro.y, gyro.z, gyro.w));
-            playerDirection.x = action_gyro.x;
+            acacceleration = Input.acceleration;// 端末の傾き具合を取得
+            playerDirection.x += Time.deltaTime * speed * acacceleration.x;// 傾き具合に応じて砲台を移動
         }
         else if (!Data.gyroFlg)
         {
             //マウスの左クリックが押されている間
             if (Input.GetMouseButton(0))
             {
-                //マウスの座標まで移動
-                if (transform.position.x + transform.localScale.x / 2 <= Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
-                {
-                    //Debug.Log("右");
-                    playerDirection.x += Time.deltaTime * speed;//移動方向＊時間＊速度
-                }
-                else if (transform.position.x - transform.localScale.x / 2 >= Camera.main.ScreenToWorldPoint(Input.mousePosition).x)
-                {
-                    //Debug.Log("左");
-                    playerDirection.x -= Time.deltaTime * speed;//移動方向＊時間＊速度
-                }
-                
+                // 移動する座標を計算
+                playerDirection.x += Time.deltaTime * speed * (Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x);
             }
         }
 
-        Bullet();//弾の生成
-        transform.position = playerDirection;
+        if(longTap)Bullet();//弾の生成
+        transform.position = playerDirection;// 計算後の座標に移動
 
         //画面外に行かないようにする
         if(transform.position.x >= maxCameraWidth.x - transform.localScale.x/2)
@@ -80,7 +78,21 @@ public class CannonProgram : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// 長押しの判定
+    /// </summary>
+    void LongTapCheck()
+    {
+        // 長押し中でないなら
+        if (!longTap)
+        {
+            tapTime += Time.deltaTime;// 経過時間
+            if (tapTime >= LONG_TAP_TIME)// 長押しの判定
+            {
+                longTap = true;// 長押しフラグ
+            }
+        }
+    }
 
 
     /// <summary>
@@ -93,7 +105,7 @@ public class CannonProgram : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             Instantiate(bulletPre, bulletInstancePos.transform.position, Quaternion.identity);//弾の生成
-            StartCoroutine(IntervalCounter());
+            StartCoroutine(IntervalCounter());// クールタイムを計算
         }
     }
 

@@ -19,9 +19,5 @@ public class CloudMove : MonoBehaviour
     {
         transform.Translate(MoveSpeed, -0.01f,0, Space.World);
 
-        if ()
-        {
-
-        }
     }
 }

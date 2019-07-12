@@ -25,6 +25,7 @@ public class StoneFall : MonoBehaviour,i_Objects
     // Update is called once per frame
     void Update()
     {
+        if (Data.pauseFlg) return;
         transform.Translate(0, -fallSpeed, 0, Space.World);
 
         if (transform.position.y < -3.0f)
@@ -54,11 +55,10 @@ public class StoneFall : MonoBehaviour,i_Objects
 
     public void IDamage()
     {
-        Debug.Log("ヒット");
         HP_fallstone -= 1;
         Instantiate(Damage, transform.position, transform.rotation);//弾が当たったら再生
         this.gameObject.transform.localScale -= new Vector3(this.transform.localScale.x/3,transform.localScale.y/3,transform.localScale.z/3);
-        Debug.Log(HP_fallstone);
+        //Debug.Log(HP_fallstone);
         //Destroy(other.gameObject);
     }
 }

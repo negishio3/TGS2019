@@ -21,6 +21,7 @@ public class UFO_Left : MonoBehaviour, i_Objects
     // Update is called once per frame
     void Update()
     {
+        if (Data.pauseFlg) return;
         //hidariに移動
         transform.Translate(movespeed, 0.01f, 0, Space.World);
         rot_UFO = new Vector3(Mathf.Sin(Time.time * UFO_rotspeed) * SwingRange, UFO_rotspeed * Time.time, 0);
@@ -47,7 +48,7 @@ public class UFO_Left : MonoBehaviour, i_Objects
 
     public void IDamage()
     {
-        Debug.Log("fooo");
+        //Debug.Log("fooo");
         HP_UFO -= 1;//弾が当たったらHPを1減らす
 
     }

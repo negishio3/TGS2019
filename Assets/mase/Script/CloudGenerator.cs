@@ -26,7 +26,7 @@ public class CloudGenerator : MonoBehaviour
         {
             Instantiate(obj, this.transform.position, Quaternion.identity);
             Debug.Log("生成");
-            CreateTime = 1;
+            CreateTime = 4;
         }
     }
 }

@@ -24,7 +24,7 @@ public class CloudGenerator : MonoBehaviour
         CreateTime -= Time.deltaTime;
         if (CreateTime<=0f)
         {
-            Instantiate(obj, this.transform.position, Quaternion.identity);
+            Instantiate(obj, new Vector3(5, Random.Range(7f, 9f), -1), Quaternion.identity);
             Debug.Log("生成");
             CreateTime = 4;
         }

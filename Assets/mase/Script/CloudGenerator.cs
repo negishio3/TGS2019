@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class CloudGenerator : MonoBehaviour
 {
-    //public GameObject[] Cloud;
-    public GameObject obj;
+    public GameObject[] Cloud; //雲の保管場所
+    //public GameObject obj;
     float CreateTime = 1.0f;
 
 
@@ -24,9 +24,9 @@ public class CloudGenerator : MonoBehaviour
         CreateTime -= Time.deltaTime;
         if (CreateTime<=0f)
         {
-            Instantiate(obj, new Vector3(5, Random.Range(7f, 9f), -1), Quaternion.identity);
-            Debug.Log("生成");
-            CreateTime = 4;
+            int Clouds = Random.Range(0, Cloud.Length);
+            Instantiate(Cloud[Clouds], new Vector3(5, Random.Range(7f, 9f), -1), Quaternion.identity);
+            CreateTime = 3;
         }
     }
 }

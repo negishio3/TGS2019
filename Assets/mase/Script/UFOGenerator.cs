@@ -6,8 +6,7 @@ public class UFOGenerator : MonoBehaviour
 {
     //public GameObject CreatePos_Left;//生成場所（左）
     //public GameObject CreatePos_Right;//生成場所（右）
-    public GameObject UFOobj_Left;
-    public GameObject UFOobj_Right;
+    public GameObject ufo;
     float CreateTime = 15;//生成間隔
     //public GameObject UfO_obj;
     GameObject Pos;
@@ -27,7 +26,7 @@ public class UFOGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Data.pauseFlg) return;
+        if (!Data.gamestartFlg||Data.pauseFlg) return;
         CreateTime -= Time.deltaTime;
         if (CreateTime <= 0f)
         {
@@ -42,14 +41,14 @@ public class UFOGenerator : MonoBehaviour
             if (Pos <= 0)
             {
 
-                Instantiate(UFOobj_Left, new Vector3(5f, 5f, 0f), Quaternion.identity);
+                Instantiate(ufo, new Vector3(Camera.main.ViewportToWorldPoint(Vector3.one).x+2.0f, 5f, 0f), Quaternion.identity);
                 Arrow_Left.SetActive(true);
                 LifeTime = 1.5f;
             }
             if (Pos >= 1)
             {
 
-                Instantiate(UFOobj_Right, new Vector3(-5f, 5f, 0f), Quaternion.identity);
+                Instantiate(ufo, new Vector3(Camera.main.ViewportToWorldPoint(Vector3.zero).x-2.0f, 5f, 0f), Quaternion.identity);
                 Arrow_Right.SetActive(true);
                 LifeTime = 1.5f;
             }

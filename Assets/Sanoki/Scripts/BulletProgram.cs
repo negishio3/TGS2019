@@ -11,9 +11,9 @@ public class BulletProgram : MonoBehaviour
 
     float speed = 15;//弾のスピード
 
-    int HP_Bullet = 2;
+    int HP_Bullet = 2;// 弾の耐久値(貫通の表現に使う予定だった)
 
-    GameObject damageEfect;
+    GameObject damageEfect;// 爆発エフェクト
 
     // Start is called before the first frame update
     void Start()
@@ -35,27 +35,33 @@ public class BulletProgram : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Meteo")
+        // 触れた対象に応じて処理を変える
+        switch (other.tag)
         {
-            HP_Bullet--;
-            Instantiate(damageEfect, transform.position, Quaternion.identity);
-            other.GetComponent<i_Objects>().IDamage();
-            AudioManager.Instance.PlaySE(AUDIO.SE_SE_MAOUDAMASHII_EXPLOSION03);
-            if (HP_Bullet == 0) Destroy(gameObject);
+            // 隕石
+            case "Meteo":
+                HP_Bullet--;// 耐久値をマイナス
+                DestroyEffect(other);
+                if (HP_Bullet == 0) Destroy(gameObject);// 耐久値が0なら削除
+                break;
+
+            // ゲームモード用のObj,UFO
+            case "GameMode":
+            case "UFO":
+                DestroyEffect(other);
+                Destroy(gameObject);// 削除
+                break;
         }
-        if (other.tag == "TitleLogo")
-        {
-            Instantiate(damageEfect, transform.position, Quaternion.identity);
-            other.GetComponent<i_Objects>().IDamage();
-            AudioManager.Instance.PlaySE(AUDIO.SE_SE_MAOUDAMASHII_EXPLOSION03);
-            Destroy(gameObject);
-        }
-        if (other.tag == "UFO")
-        {
-            Instantiate(damageEfect, transform.position, Quaternion.identity);
-            other.GetComponent<i_Objects>().IDamage();
-            AudioManager.Instance.PlaySE(AUDIO.SE_SE_MAOUDAMASHII_EXPLOSION03);
-            Destroy(gameObject);
-        }
+    }
+
+    /// <summary>
+    /// 弾が消えるときの処理
+    /// </summary>
+    /// <param name="other">Collider</param>
+    void DestroyEffect(Collider other)
+    {
+        Instantiate(damageEfect, transform.position, Quaternion.identity);// エフェクトの生成
+        other.GetComponent<i_Objects>().IDamage();// 触れた対象のIDamage()を呼ぶ
+        AudioManager.Instance.PlaySE(AUDIO.SE_SE_MAOUDAMASHII_EXPLOSION03);// SEを再生
     }
 }

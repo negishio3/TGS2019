@@ -16,39 +16,42 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     public Transform[] fallMeteoPos = new Transform[3];// 隕石の開始地点
     public Transform[] scorePos = new Transform[3];// scoreの表示位置
 
-    public Transform resultFallPos;
+    public Transform resultFallPos;// リザルトで使用する隕石の落下開始地点
     public Transform[] resultPos = new Transform[3];// リザルトで使用するTransform
+
+    public GameObject highScore_Obj;// ハイスコアのときに表示するやつ
+    bool highScoreFlg;// ↑を表示・非表示する用
 
     int[] ranking = new int[3];// ランキングの保存用
 
-    int rankingCount = 0;// ランキングがどこまで表示されたかカウント
+    public int rankingCount = 0;// ランキングがどこまで表示されたかカウント
 
-    SceneFader sf;
+    SceneFader sf;// シーンフェーダー
 
-    bool stayFlg = true;
+    int ranking_No=-1;// 今回の順位(順位外なら-1位)
+
+    int transition;// 遷移状況
 
     //-----------------------
-    List<GameObject> _scoreUI = new List<GameObject>();
+    List<GameObject> _scoreUI = new List<GameObject>();// スコアUIの一時保存用List
     //-----------------------
 
     // リザルトシーンのステート
     public enum ResultState{
-        RESULT,
-        RANKING
+        RESULT,// リザルト
+        RANKING// ランキング
     }
 
-    public ResultState state = ResultState.RESULT;
+    public ResultState state = ResultState.RESULT;// 初期はリザルトから
 
 
     // Start is called before the first frame update
     void Start()
     {
-        AudioManager.Instance.PlayBGM(AUDIO.BGM_THEEXPENDABLES);
-        stayFlg = true;
+        AudioManager.Instance.PlayBGM(AUDIO.BGM_THEEXPENDABLES);// BGM再生
         sf = FindObjectOfType<SceneFader>();// SceneFaderの読み込み
         RankingUpdate();// ランキングデータの更新
         StartCoroutine(InputWait());// タップの待機処理
-        Data.pauseFlg = true;// ポーズ中に設定
 
         Invoke("ResultStart", 1.0f);// リザルトコルーチン
     }
@@ -57,7 +60,8 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.G)) sf.SceneChange("Game");// Gキーでゲームシーン
+        if (Input.GetKeyDown(KeyCode.R)) sf.SceneChange("Result");// Rキーでリザルトを再呼び出し
         if (Input.GetKeyDown(KeyCode.Space))
         {
             DataReset();// データのリセット
@@ -76,6 +80,7 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
             // scoreがranking[i]より大きかったら
             if (ranking[i] < score)
             {
+                if (ranking_No != -1) ranking_No = i;// データの更新があったときのみ順位を保存
                 int x = ranking[i];// xに一時保存
                 ranking[i] = score;// ranking[i]にscoreを更新
                 score = x;// scoreを更新
@@ -110,21 +115,35 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     public string GetRankingScore()
     {
         string sData = "";// 戻り値の初期化
-        rankingCount++;// カウンターをプラス
-        switch (rankingCount - 1)
+        //rankingCount++;// カウンターをプラス
+        switch (rankingCount)
         {
             case 0:
-                sData = "1st:" + ranking[rankingCount - 1];
+                sData = "1st:" + ranking[rankingCount];
                 break;
             case 1:
-                sData = "2nd:" + ranking[rankingCount - 1];
+                sData = "2nd:" + ranking[rankingCount];
                 break;
             case 2:
-                sData = "3rd:" + ranking[rankingCount - 1];
+                sData = "3rd:" + ranking[rankingCount];
                 break;
         }
-
+        rankingCount++;// カウンターをプラス
         return sData;// 表示する文字列を返す
+    }
+
+    /// <summary>
+    /// 演出のスキップ
+    /// </summary>
+    void ResultSkip()
+    {
+        if (state == ResultState.RESULT) highScore_Obj.SetActive(highScoreFlg);
+        StopCoroutine(state == ResultState.RESULT ? ResultCoroutine() : RankingCoroutine());// 遷移状況によってコルーチンを止める
+        for (int i = rankingCount; i < resultPos.Length; i++)
+        {
+            EfectInstance(state == ResultState.RESULT ? resultPos[i].position : scorePos[i].position);// 遷移状況に応じてUIの表示位置を調整
+        }
+
     }
 
     /// <summary>
@@ -133,7 +152,7 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     /// <param name="instancePos">生成する座標</param>
     public void EfectInstance(Vector3 instancePos)
     {
-        AudioManager.Instance.PlaySE(AUDIO.SE_SE_MAOUDAMASHII_EXPLOSION05);
+        //audiomanager.instance.playse(audio.se_se_maoudamashii_explosion05);// seの再生
         Instantiate(efectPre, instancePos, Quaternion.identity);// エフェクトの生成
         _scoreUI.Add(Instantiate(scoreUI, instancePos, Quaternion.identity));// UIの生成
 
@@ -158,7 +177,7 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     /// </summary>
     void ResultStart()
     {
-        StartCoroutine(ResultCoroutine());
+        StartCoroutine(ResultCoroutine());// コルーチンの再生
     }
 
     /// <summary>
@@ -167,12 +186,14 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     /// <returns></returns>
     IEnumerator ResultCoroutine()
     {
+        highScore_Obj.SetActive(highScoreFlg);// ハイスコアの表示・非表示
         for (int i = 0; i < resultPos.Length; i++)
         {
+            if (transition >= 1) yield break;// 遷移状況が1以上になったら終了
             Instantiate(fallMeteo[Random.Range(0, 2)], resultFallPos.position, Quaternion.identity);// 隕石の生成
             yield return new WaitForSeconds(1.0f);// 1秒待つ
         }
-        stayFlg = false;
+        transition = 1;// 遷移状況を1に
 
     }
     /// <summary>
@@ -183,10 +204,11 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     {
         for(int i = 0; i < ranking.Length; i++)
         {
+            if (transition >= 3) yield break;// 遷移状況が3以上ならスキップ
             InstanceMeteo();// 隕石の生成
             yield return new WaitForSeconds(1.0f);// 1秒待つ
         }
-        stayFlg = false;
+        transition = 3 ;// 遷移状況を3に
     }
 
     
@@ -196,7 +218,9 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     /// </summary>
     void RankingUpdate()
     {
-        string[] rankingData = PlayerPrefs.GetString("RankingData", "0,0,0").Split(',');// 保存されているデータを,毎にランキング配列に保存
+        string[] rankingData = (Data.GameMode == Data.ModeType.Endless) ?
+            PlayerPrefs.GetString("EndlessMode_Data", "0,0,0").Split(',') :// 保存されているデータを
+            PlayerPrefs.GetString("TimeAttackMode_Data", "0,0,0").Split(',');// ゲームモード毎にランキング配列に保存
 
         // ランキング配列分回す
         for (int i = 0; i < ranking.Length; i++)
@@ -205,9 +229,22 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
         }
         //Debug.Log("[0]" + ranking[0] + "[1]" + ranking[1] + "[2]" + ranking[2]);// 確認用
 
+        if (Data.score > ranking[0]) highScoreFlg = true;
+
         RankingSort(Data.score);// ランキングのソート
 
-        PlayerPrefs.SetString("RankingData", ranking[0] + "," + ranking[1] + "," + ranking[2]);// データの保存
+        switch (Data.GameMode)// ランキングデータの保存
+        {
+            case Data.ModeType.Endless:
+                PlayerPrefs.SetString("EndlessMode_Data", ranking[0] + "," + ranking[1] + "," + ranking[2]);
+                break;
+            case Data.ModeType.TimeAttack:
+                PlayerPrefs.SetString("TimeAttackMode_Data", ranking[0] + "," + ranking[1] + "," + ranking[2]);
+                break;
+            default:
+                Debug.LogError(Data.GameMode + "用の処理が存在しません");
+                break;
+        }
     }
 
     /// <summary>
@@ -216,33 +253,43 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     /// <returns></returns>
     IEnumerator InputWait()
     {
-     result:
-        yield return new WaitUntil(Touch);
-        yield return new WaitWhile(Touch);// タップの待機
-        if (stayFlg) goto result;
-        DeleteScoreUI();
-        rankingCount = 0;// ランキングカウントのリセット
-        label[0].SetActive(false);
-        label[1].SetActive(true);
-        state = ResultState.RANKING;
-        StartCoroutine(RankingCoroutine());
-        
-        SetFlg();
-     ranking:
-        yield return new WaitUntil(Touch);
-        yield return new WaitWhile(Touch);
-        if (stayFlg) goto ranking;
-        sf.SceneChange("Game");
-    }
-
-    bool Touch()
-    {
-        return Input.GetMouseButtonDown(0);
-    }
-
-    public void SetFlg()
-    {
-        stayFlg = true;
+        transition = 0;// 遷移状況を初期化
+        while (true)
+        {
+            if (Input.GetMouseButtonDown(0))// タップされたとき
+            {
+                switch (transition)
+                {
+                    case 0:
+                        ResultSkip();// 演出のスキップ
+                        transition++;// 遷移状況を1つ進める
+                        break;
+                    case 1:
+                        transition++;// 遷移状況を1つ進める
+                        DeleteScoreUI();// 生成したUIを削除
+                        rankingCount = 0;// ランキングカウントのリセット
+                        label[0].SetActive(false);// リザルトCanvasを非表示
+                        label[1].SetActive(true);// ランキングCanvasを表示
+                        state = ResultState.RANKING;// ステートを更新
+                        StartCoroutine(RankingCoroutine());// コルーチンの再生
+                        //SetFlg();
+                        
+                        break;
+                    case 2:
+                        ResultSkip();// 演出のスキップ
+                        transition++;// 遷移状況を1つ進める
+                        break;
+                    case 3:
+                        sf.SceneChange("Game");// Gameシーンへ
+                        break;
+                    default:
+                        Debug.LogError("以降の処理がありません");// 例外処理
+                        break;
+                }
+               
+            }
+            yield return null;// 1フレーム待つ
+        }
     }
 
     /// <summary>
@@ -250,36 +297,43 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     /// </summary>
     void DataReset()
     {
-        PlayerPrefs.DeleteKey("RankingData");
+        PlayerPrefs.DeleteKey("EndlessMode_Data");
+        PlayerPrefs.DeleteKey("TimeAttackMode_Data");
     }
 
-    public Vector3 GetResultFallPos()
+    public Vector3 GetResultFallPos
     {
-        return resultFallPos.position;
+        get
+        {
+            return resultFallPos.position;
+        }
     }
 
-    public Vector3 GetResultPos()
+    public Vector3 GetResultPos
     {
-        return resultPos[rankingCount].position;
+        get
+        {
+            return resultPos[rankingCount].position;
+        }
     }
 
-    public ResultState GetState()
+    public ResultState GetState
     {
-        return state;
-
+        get
+        {
+            return state;
+        }
     }
 
-    public bool GetStayFlg()
-    {
-        return stayFlg;
-    }
-    
+    /// <summary>
+    ///  リザルトで使用するTextデータ
+    /// </summary>
+    /// <returns></returns>
     public string GetResultText()
     {
         string returnText = "";
 
-        rankingCount++;// カウンターをプラス
-        switch (rankingCount - 1)
+        switch (rankingCount)
         {
             case 0:
                 returnText = Data.score.ToString();
@@ -292,16 +346,26 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
                 break;
         }
 
+        rankingCount++;// カウンターをプラス
+
         return returnText;
     }
 
+    /// <summary>
+    /// UIの削除
+    /// </summary>
     void DeleteScoreUI()
     {
-        for (int i = 0; i < _scoreUI.Count; i++)
+        for (int i = 0; i < _scoreUI.Count; i++)// 生成されているUI分回す
         {
-            Destroy(_scoreUI[i]);
+            Destroy(_scoreUI[i]);// 削除
         }
 
-        _scoreUI.Clear();
+        _scoreUI.Clear();// UIデータクリア
+    }
+    
+    public int Transition
+    {
+        get { return transition; }
     }
 }

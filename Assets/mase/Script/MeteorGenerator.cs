@@ -18,11 +18,9 @@ public class MeteorGenerator : SingletonMonoBehaviour<MeteorGenerator>
 
      void Update()
     {
-        if (Data.pauseFlg) return;
+        if (!Data.gamestartFlg||Data.pauseFlg||ufoFlg) return;
         //MeteorPrefabの生成
         //Instantiate(MeteorPrefab, new Vector3(-2.5f + 5 * Random.value, 9, 0), Quaternion.identity);
-        if (!ufoFlg)
-        {
             TimeLeft -= Time.deltaTime;
             if (TimeLeft <= 0f)
             {
@@ -30,9 +28,8 @@ public class MeteorGenerator : SingletonMonoBehaviour<MeteorGenerator>
                 //Debug.Log(TimeLeft);
                 int Meteors = Random.Range(0, MeteorPrefab.Length);//ランダムで選択するよ
                 Instantiate(MeteorPrefab[Meteors], new Vector3(-2.5f + 5 * Random.value, 9, 0), Quaternion.identity);//生成する
-                Debug.Log("でた");
+                //Debug.Log("でた");
             }
-        }
     }
 
     void TimeCounter()

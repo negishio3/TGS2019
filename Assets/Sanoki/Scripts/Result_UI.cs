@@ -5,28 +5,27 @@ using UnityEngine.UI;
 
 public class Result_UI : MonoBehaviour
 {
-    Text scoreText;
+    Text scoreText;// score表示テキスト
     // Start is called before the first frame update
     void Start()
     {
-        //StartCoroutine(InputWait());
-        scoreText = GetComponent<Text>();
+        scoreText = GetComponent<Text>();// 自身のTextコンポーネント取得
 
-        SetText();
+        SetText();// 表示するテキストを設定
 
         //scoreText.text = ResultSystem.Instance.GetRankingScore();
     }
 
     void SetText()
     {
-
-        switch (ResultSystem.Instance.GetState())
+        // 遷移状況を取得
+        switch (ResultSystem.Instance.GetState)
         {
-            case ResultSystem.ResultState.RESULT:
-                scoreText.text = ResultSystem.Instance.GetResultText();
+            case ResultSystem.ResultState.RESULT:// リザルト中
+                scoreText.text = ResultSystem.Instance.GetResultText();// 取得
                 break;
-            case ResultSystem.ResultState.RANKING:
-                scoreText.text = ResultSystem.Instance.GetRankingScore();
+            case ResultSystem.ResultState.RANKING:// ランキング中
+                scoreText.text = ResultSystem.Instance.GetRankingScore();// 取得
                 break;
             default:
                 break;

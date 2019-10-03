@@ -20,6 +20,7 @@ public class FallStone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Data.pauseFlg) return;
         //transform.Translate(0, -fallSpeed, 0, Space.World);
         transform.Rotate(rotSpeed, -rotSpeed, 0);
 

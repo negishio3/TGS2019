@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class UFO : MonoBehaviour,i_Objects
 {
+    public enum UFO_Type
+    {
+        Left,
+        Right
+    }
+
+    UFO_Type UFOType = UFO_Type.Left;
+
     public float movespeed;//UFOの移動速度
     public int HP_UFO;//UFOのHP
     float UFO_rotspeed = 10;
@@ -14,32 +22,59 @@ public class UFO : MonoBehaviour,i_Objects
         // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(Camera.main.ViewportToWorldPoint(Vector3.one).x);
         //UFOのオブジェクトの位置情報を代入
         UFO_pos = this.gameObject.transform.position.y;
+        if (transform.position.x >= Vector3.zero.x)
+        {
+            UFOType = UFO_Type.Right;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Data.pauseFlg) return;
-        //右に移動
-        transform.Translate(movespeed, -0.01f, 0, Space.World);
-        rot_UFO = new Vector3(Mathf.Sin(Time.time*UFO_rotspeed)*SwingRange,UFO_rotspeed*Time.time,0);
+        rot_UFO = new Vector3(Mathf.Sin(Time.time * UFO_rotspeed) * SwingRange, UFO_rotspeed * Time.time, Mathf.Sin(Time.time * UFO_rotspeed) * SwingRange);
         transform.eulerAngles = rot_UFO;
         //上下移動
-        transform.position = new Vector3(transform.position.x, UFO_pos+Mathf.PingPong(Time.time, 1), transform.position.z);
-        if (HP_UFO<=0)
+        transform.position = new Vector3(transform.position.x, UFO_pos + Mathf.PingPong(Time.time, 1), transform.position.z);
+
+        switch (UFOType) {
+
+            case UFO_Type.Left:
+                //右に移動
+                transform.Translate(movespeed, -0.01f, 0, Space.World);
+                // 画面外に出たら削除
+                if (transform.position.x >= Camera.main.ViewportToWorldPoint(Vector3.one).x + transform.localScale.x)
+                {
+                    MeteorGenerator.Instance.ChangeUFOFlg(false);
+                    //StartCoroutine()
+                    Destroy(gameObject);//自分を消す
+                }
+
+                break;
+            case UFO_Type.Right:
+                //左に移動
+                transform.Translate(-movespeed, -0.01f, 0, Space.World);
+                // 画面外に出たら削除
+                if (transform.position.x <= Camera.main.ViewportToWorldPoint(Vector3.zero).x - transform.localScale.x)
+                {
+                    MeteorGenerator.Instance.ChangeUFOFlg(false);
+                    //StartCoroutine()
+                    Destroy(gameObject);//自分を消す
+                }
+                break;
+            default:
+                Debug.LogError("Typeが選択されていません");
+                break;
+        }
+        if (HP_UFO <= 0)
         {
             MeteorGenerator.Instance.ChangeUFOFlg(false);
             Data.breakUFOCount++;
             //Instantiate(Item,transform.position, Quaternion.identity);//生成する
             Destroy(gameObject);//㏋が0になったら消す
-        }
-        if (transform.position.x >= 12)
-        {
-            MeteorGenerator.Instance.ChangeUFOFlg(false);
-            //StartCoroutine()
-            Destroy(gameObject);//自分を消す
         }
         //this.gameObject.transform.position = new Vector3(UFO_pos.x,(UFO_pos.y + Mathf.PingPong(Time.time, 2)), UFO_pos.z);
     }

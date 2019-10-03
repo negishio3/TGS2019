@@ -152,7 +152,7 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     /// <param name="instancePos">生成する座標</param>
     public void EfectInstance(Vector3 instancePos)
     {
-        AudioManager.Instance.PlaySE(AUDIO.SE_SE_MAOUDAMASHII_EXPLOSION05);// SEの再生
+        //audiomanager.instance.playse(audio.se_se_maoudamashii_explosion05);// seの再生
         Instantiate(efectPre, instancePos, Quaternion.identity);// エフェクトの生成
         _scoreUI.Add(Instantiate(scoreUI, instancePos, Quaternion.identity));// UIの生成
 

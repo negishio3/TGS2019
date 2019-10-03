@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3159677402817580637}
   - component: {fileID: 5372440291572950104}
   - component: {fileID: 9013295229788019621}
-  - component: {fileID: 509961758649888310}
+  - component: {fileID: 6031109485843651426}
   m_Layer: 0
   m_Name: UFO_Right
   m_TagString: UFO
@@ -63,7 +63,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &509961758649888310
+--- !u!114 &6031109485843651426
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4fda6a31b2fe02498af5592f4618d93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UFOType: 1
   movespeed: 0.02
   HP_UFO: 3
 --- !u!95 &3159677401154145091

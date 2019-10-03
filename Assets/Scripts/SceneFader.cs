@@ -79,6 +79,7 @@ public class SceneFader : MonoBehaviour
                     fadeColor.a = Mathf.Lerp(0.0f, 1.0f, t);//アルファ値を徐々に上げる
                     yield return null;//1フレーム待つ
                 }
+                Data.pauseFlg = false;
                 if (sceneChange) { SceneManager.LoadScene(next_Scene); }//シーン遷移
                 else
                 {

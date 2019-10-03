@@ -46,7 +46,8 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
         AudioManager.Instance.PlayBGM(AUDIO.BGM_THEEXPENDABLES);// BGMを再生
         sf = FindObjectOfType<SceneFader>();// SceneFaderを取得
         timmerText = timmerText_Obj.GetComponent<Text>();// テキストコンポーネントを取得
-        for(int i = 0; i < debugButtons.Length; i++)
+        gyroToggle.isOn = Data.gyroFlg;// 操作方法を取得して繁栄
+        for (int i = 0; i < debugButtons.Length; i++)
         {
             debugButtons[i].SetActive(Data.debugFlg);// 隠しボタンを表示・非表示
         }
@@ -191,8 +192,21 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
     /// </summary>
     public void GameFinish()
     {
+        Data.debugFlg = false;
+        settingsFlg = false;// セッティングを中止
         Data.gamestartFlg = false;// ゲーム終了に設定
         sf.SceneChange("Result");// リザルトへ遷移
+    }
+
+    /// <summary>
+    /// タイトルに戻る
+    /// </summary>
+    public void ReStart()
+    {
+        Data.debugFlg = false ;
+        settingsFlg = false;// セッティングを中止
+        Data.gamestartFlg = false;// ゲーム終了に設定
+        sf.SceneChange("Game");// タイトルへ遷移
     }
 
     /// <summary>
@@ -256,7 +270,6 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
 
     public void DataReSet()
     {
-        gyroToggle.isOn = Data.gyroFlg;// 操作方法を取得して繁栄
         Data.timmer = Data.GameMode == Data.ModeType.Endless ? 0 : 120;// タイマーをリセット
         timmerText.text = "TIME:" + (int)Data.timmer;// タイマーの表示をリセット
         timmerText_Obj.SetActive(Data.GameMode == Data.ModeType.TimeAttack);// モードによってタイマーを表示非表示

@@ -22,7 +22,7 @@ public class UFO_Left : MonoBehaviour, i_Objects
     void Update()
     {
         if (Data.pauseFlg) return;
-        //hidariに移動
+        //左に移動
         transform.Translate(movespeed, 0.01f, 0, Space.World);
         rot_UFO = new Vector3(Mathf.Sin(Time.time * UFO_rotspeed) * SwingRange, UFO_rotspeed * Time.time, 0);
         transform.eulerAngles = rot_UFO;
@@ -35,7 +35,7 @@ public class UFO_Left : MonoBehaviour, i_Objects
             //Instantiate(Item,transform.position, Quaternion.identity);//生成する
             Destroy(gameObject);//㏋が0になったら消す
         }
-        if (transform.position.x >= 5)
+        if (transform.position.x <= Camera.main.ViewportToWorldPoint(Vector3.zero).x-transform.localScale.x)
         {
             MeteorGenerator.Instance.ChangeUFOFlg(false);
             //StartCoroutine()

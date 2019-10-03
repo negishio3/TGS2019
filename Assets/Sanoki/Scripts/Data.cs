@@ -13,11 +13,11 @@ public class Data : MonoBehaviour
     public static int breakMeteoCount;// 壊した隕石カウンター
     public static int breakUFOCount;// 壊したUFOカウンター
 
-    public static bool gamestartFlg = false;
+    public static bool gamestartFlg = false;// ゲーム開始用フラグ
     public static bool gyroFlg = false;// ジャイロ操作を実行するフラグ
     public static bool pauseFlg = false;//ポーズ用フラグ
 
-    public static bool debugFlg = false;
+    public static bool debugFlg = false;// デバッグモード用フラグ
 
     // ゲームモードの種類
     public enum ModeType

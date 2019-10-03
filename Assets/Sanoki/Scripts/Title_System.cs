@@ -5,22 +5,18 @@ using UnityEngine;
 
 public class Title_System : MonoBehaviour,i_Objects
 {
-    int HP_title = 5;
-    public GameObject BreakEfect;
-    public GameObject gameCanvas;
+    int HP_title = 5;// タイトルの耐久値
+    public GameObject BreakEfect;// 壊れたときのエフェクト
+    public GameObject gameCanvas;// ゲーム用Canvas
 
-
-    // Start is called before the first frame update
-    void Start()
+    // ゲームモードのタイプ
+    public enum MadeType
     {
-        
+        Endless,// エンドレスモード
+        TimeAttack// タイムアタックモード
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public MadeType gameMode;// ゲームモード
 
     public void IDamage()
     {
@@ -34,8 +30,9 @@ public class Title_System : MonoBehaviour,i_Objects
     
     void TitleBreak()
     {
+        Data.GameMode = (Data.ModeType)gameMode;
         Instantiate(BreakEfect, transform.position, Quaternion.identity);
         gameCanvas.SetActive(true);
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 }

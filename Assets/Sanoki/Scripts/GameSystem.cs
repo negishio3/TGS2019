@@ -148,7 +148,7 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
     /// タイムを加算
     /// </summary>
     /// <param name="addTime">加算するタイム</param>
-    void AddTime(int addTime)
+    public void AddTime(int addTime)
     {
         Data.timmer += addTime;// 加算
         // ここにタイムの加算アニメーション
@@ -175,7 +175,6 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
         Color endColor=new Color(1,1,1,0.7f);// 不透明度 70%
         float t = 0;// 経過時間のリセット
 
-        //if()
         if (damageImage.color == endColor) yield break;
 
         while (t < 1)
@@ -203,7 +202,7 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
     /// </summary>
     public void ReStart()
     {
-        Data.debugFlg = false ;
+        Data.debugFlg = false ;// デバッグモードを終了
         settingsFlg = false;// セッティングを中止
         Data.gamestartFlg = false;// ゲーム終了に設定
         sf.SceneChange("Game");// タイトルへ遷移

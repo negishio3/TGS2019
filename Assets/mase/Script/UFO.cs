@@ -19,9 +19,12 @@ public class UFO : MonoBehaviour,i_Objects
     Vector3 rot_UFO;
     float UFO_pos;
 
+    int addScore;
+
         // Start is called before the first frame update
     void Start()
     {
+        addScore = 150 / HP_UFO;//基本値をHPで割った値をスコアとする
         Debug.Log(Camera.main.ViewportToWorldPoint(Vector3.one).x);
         //UFOのオブジェクトの位置情報を代入
         UFO_pos = this.gameObject.transform.position.y;
@@ -71,6 +74,9 @@ public class UFO : MonoBehaviour,i_Objects
         }
         if (HP_UFO <= 0)
         {
+            if (Data.GameMode == Data.ModeType.TimeAttack) GameSystem.Instance.AddTime(5);
+            else GameSystem.Instance.EarthHeal(50);
+            GameSystem.Instance.AddScore(150);
             MeteorGenerator.Instance.ChangeUFOFlg(false);
             Data.breakUFOCount++;
             //Instantiate(Item,transform.position, Quaternion.identity);//生成する
@@ -82,7 +88,7 @@ public class UFO : MonoBehaviour,i_Objects
 
     public void IDamage()
     {
-        //Debug.Log("fooo");
+        GameSystem.Instance.AddScore(addScore);// 値分のスコアを加算
         HP_UFO -= 1;//弾が当たったらHPを1減らす
 
     }

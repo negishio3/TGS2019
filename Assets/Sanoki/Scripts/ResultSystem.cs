@@ -24,13 +24,13 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
 
     int[] ranking = new int[3];// ランキングの保存用
 
-    public int rankingCount = 0;// ランキングがどこまで表示されたかカウント
+    int rankingCount = 0;// ランキングがどこまで表示されたかカウント
 
     SceneFader sf;// シーンフェーダー
 
     int transition;// 遷移状況
 
-    public int rank_No = -1;// 今回の順位(順位外なら-1位)
+    int rank_No = -1;// 今回の順位(順位外なら-1位)
 
     //-----------------------
     List<GameObject> _scoreUI = new List<GameObject>();// スコアUIの一時保存用List
@@ -365,17 +365,19 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
         _scoreUI.Clear();// UIデータクリア
     }
     
+    // 遷移状況
     public int Transition
     {
         get { return transition; }
+    }
+    // 今回の順位
+    public int Rank_No
+    {
+        get { return rank_No; }
     }
 
     public int RankingCount
     {
         get { return rankingCount; }
-    }
-    public int Rank_No
-    {
-        get { return rank_No; }
     }
 }

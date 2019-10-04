@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c559fc956a41c44b952f8c734489255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP_fallstone: 2
+  HP_fallstone: 3
   Damage: {fileID: 686005915128617222, guid: 99197a4436450ad4fa792ff76b698f26, type: 3}
   explosion: {fileID: 904113525, guid: 7a9ade9fc6442e14dba05a829ba875ec, type: 3}
 --- !u!135 &4498658975820411455

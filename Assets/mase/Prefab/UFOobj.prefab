@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3360202954984606655}
   - component: {fileID: 9105916037890394844}
   m_Layer: 0
-  m_Name: UFO_Left
+  m_Name: UFOobj
   m_TagString: UFO
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,8 +75,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4fda6a31b2fe02498af5592f4618d93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movespeed: 0.02
-  HP_UFO: 3
+  movespeed: 0.05
+  HP_UFO: 5
 --- !u!1 &574517445846669924
 GameObject:
   m_ObjectHideFlags: 0

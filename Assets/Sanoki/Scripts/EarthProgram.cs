@@ -19,7 +19,7 @@ public class EarthProgram : MonoBehaviour
             AudioManager.Instance.PlaySE(AUDIO.SE_SE_MAOUDAMASHII_EXPLOSION05);// 爆発のSEを再生
             Destroy(other.gameObject);// 隕石を削除
             GameSystem.Instance.EarthDamage(100);// 耐久値を減らす
-            if (Data.earthHP <= 0)// 耐久値が0になったら
+            if (Data.earthHP <= 0)// 耐久値が0以下になったら
             {
                 GameSystem.Instance.GameFinish();// ゲームを終了
             }

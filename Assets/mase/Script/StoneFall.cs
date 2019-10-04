@@ -11,11 +11,13 @@ public class StoneFall : MonoBehaviour,i_Objects
     float rnd;//ランダムの保存先
     public ParticleSystem Damage;//弾が当たり体力が減った時
     public ParticleSystem explosion;//体力がなくなった時
+    int addscore;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        addscore = 100 / HP_fallstone;
         rnd = Random.value;
         //this.fallSpeed = Fall_Min + Fall_Max * rnd;
         this.fallSpeed = 0.03f + 0.05f * rnd;
@@ -37,7 +39,7 @@ public class StoneFall : MonoBehaviour,i_Objects
         if (HP_fallstone <= 0)
         {
             AudioManager.Instance.PlaySE(AUDIO.SE_SE_MAOUDAMASHII_EXPLOSION05);
-            GameSystem.Instance.AddScore(100);
+            //GameSystem.Instance.AddScore(100);
             Data.breakMeteoCount++;
             Instantiate(explosion, transform.position, transform.rotation);//体力が0になったら再生
             
@@ -55,6 +57,7 @@ public class StoneFall : MonoBehaviour,i_Objects
 
     public void IDamage()
     {
+        GameSystem.Instance.AddScore(addscore);
         HP_fallstone -= 1;
         Instantiate(Damage, transform.position, transform.rotation);//弾が当たったら再生
         this.gameObject.transform.localScale -= new Vector3(this.transform.localScale.x/3,transform.localScale.y/3,transform.localScale.z/3);

@@ -28,9 +28,9 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
 
     SceneFader sf;// シーンフェーダー
 
-    int ranking_No=-1;// 今回の順位(順位外なら-1位)
-
     int transition;// 遷移状況
+
+    public int rank_No = -1;// 今回の順位(順位外なら-1位)
 
     //-----------------------
     List<GameObject> _scoreUI = new List<GameObject>();// スコアUIの一時保存用List
@@ -48,6 +48,7 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     // Start is called before the first frame update
     void Start()
     {
+        rank_No = -1;
         AudioManager.Instance.PlayBGM(AUDIO.BGM_THEEXPENDABLES);// BGM再生
         sf = FindObjectOfType<SceneFader>();// SceneFaderの読み込み
         RankingUpdate();// ランキングデータの更新
@@ -80,7 +81,7 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
             // scoreがranking[i]より大きかったら
             if (ranking[i] < score)
             {
-                if (ranking_No != -1) ranking_No = i;// データの更新があったときのみ順位を保存
+                if (rank_No == -1) rank_No = i;// データの更新があったときのみ順位を保存
                 int x = ranking[i];// xに一時保存
                 ranking[i] = score;// ranking[i]にscoreを更新
                 score = x;// scoreを更新
@@ -367,5 +368,14 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     public int Transition
     {
         get { return transition; }
+    }
+
+    public int RankingCount
+    {
+        get { return rankingCount; }
+    }
+    public int Rank_No
+    {
+        get { return rank_No; }
     }
 }

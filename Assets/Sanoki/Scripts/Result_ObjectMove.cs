@@ -32,7 +32,7 @@ public class Result_ObjectMove : MonoBehaviour
         if (ResultSystem.Instance.GetState == ResultSystem.ResultState.RESULT)// ステートがRESULTなら
         {
             ResultSystem.Instance.EfectInstance(transform.position);// UIを生成
-            Destroy(gameObject);// 自信を削除
+            Destroy(gameObject);// 自身を削除
         }
     }
 }

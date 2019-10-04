@@ -25,6 +25,8 @@ public class Result_UI : MonoBehaviour
                 scoreText.text = ResultSystem.Instance.GetResultText();// 取得
                 break;
             case ResultSystem.ResultState.RANKING:// ランキング中
+                if (ResultSystem.Instance.rankingCount == ResultSystem.Instance.rank_No)
+                    scoreText.color = Color.red;
                 scoreText.text = ResultSystem.Instance.GetRankingScore();// 取得
                 break;
             default:

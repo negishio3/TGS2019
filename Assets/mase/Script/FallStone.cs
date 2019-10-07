@@ -7,7 +7,6 @@ public class FallStone : MonoBehaviour
     float fallSpeed;//落ちる速度
     float rotSpeed;//回転速度
     float rnd;//ランダムの保存先
-    //public int HP_fallstone = 3;//隕石の体力
 
     // Start is called before the first frame update
     void Start()
@@ -23,64 +22,5 @@ public class FallStone : MonoBehaviour
         if (Data.pauseFlg) return;
         //transform.Translate(0, -fallSpeed, 0, Space.World);
         transform.Rotate(rotSpeed, -rotSpeed, 0);
-
-        //if (transform.position.y<-3.0f)
-        //{
-        //    Destroy(gameObject);
-        //    Debug.Log("きえええええええええええ");
-        //}
-
-        //if (HP_fallstone <= 0)
-        //{
-        //    Destroy(gameObject);
-        //    //hpが0になったら消える
-        //}
-
-        //if (hp >= 5 && hp<=5)
-        //{
-        //    this.gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-        //}
-        //if (hp >= 4 && hp <= 4)
-        //{
-        //    this.gameObject.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        //}
-        //if (hp >= 3 && hp <= 3)
-        //{
-        //    this.gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
-        //}
-        //if (hp >= 2 && hp <= 2)
-        //{
-        //    this.gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-        //}
-        //if (hp >= 1 && hp <= 1)
-        //{
-        //    this.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        //}
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.tag == "bullet")
-    //    {
-
-    //        Debug.Log("ヒット");
-    //        HP_fallstone -= 1;
-    //        this.gameObject.transform.localScale -= new Vector3(0.3f, 0.3f, 0.3f);
-    //        Debug.Log(HP_fallstone);
-    //        Destroy(other.gameObject);
-
-    //        //Destroy(gameObject);
-    //    }
-    //}
-
-    //public void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.tag == "bullet")
-    //    {
-
-    //        Debug.Log("ヒット");
-
-    //        Destroy(this);
-    //    }
-    //}
 }

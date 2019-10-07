@@ -12,6 +12,7 @@ TagManager:
   - TitleLogo
   - UFO
   - GameMode
+  - Item
   layers:
   - Default
   - TransparentFX

@@ -125,4 +125,12 @@ public class CannonProgram : MonoBehaviour
         bulletTime = 0;//経過時間のリセット
 
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Item")
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_ITEM);
+            other.GetComponent<i_item>().ItemUse();
+        }
+    }
 }

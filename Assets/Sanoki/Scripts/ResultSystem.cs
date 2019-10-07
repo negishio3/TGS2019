@@ -49,7 +49,7 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
     void Start()
     {
         rank_No = -1;
-        AudioManager.Instance.PlayBGM(AUDIO.BGM_THEEXPENDABLES);// BGM再生
+        AudioManager.Instance.PlayBGM(AUDIO.BGM_DISTANTFUTURE);// BGM再生
         sf = FindObjectOfType<SceneFader>();// SceneFaderの読み込み
         RankingUpdate();// ランキングデータの更新
         StartCoroutine(InputWait());// タップの待機処理

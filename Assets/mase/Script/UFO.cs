@@ -19,7 +19,10 @@ public class UFO : MonoBehaviour,i_Objects
     Vector3 rot_UFO;
     float UFO_pos;
 
+    public GameObject[] item;
     int addScore;
+
+    public GameObject addScoreCanvas;
 
         // Start is called before the first frame update
     void Start()
@@ -74,20 +77,38 @@ public class UFO : MonoBehaviour,i_Objects
         }
         if (HP_UFO <= 0)
         {
-            if (Data.GameMode == Data.ModeType.TimeAttack) GameSystem.Instance.AddTime(5);
-            else GameSystem.Instance.EarthHeal(50);
+            switch (Data.GameMode)
+            {
+                case Data.ModeType.Endless:
+                    Instantiate(item[0], transform.position, Quaternion.identity);
+                    break;
+                case Data.ModeType.TimeAttack:
+                    Instantiate(item[1],transform.position, Quaternion.identity);//生成する
+                    break;
+            } 
             GameSystem.Instance.AddScore(150);
             MeteorGenerator.Instance.ChangeUFOFlg(false);
             Data.breakUFOCount++;
-            //Instantiate(Item,transform.position, Quaternion.identity);//生成する
+            
             Destroy(gameObject);//㏋が0になったら消す
         }
         //this.gameObject.transform.position = new Vector3(UFO_pos.x,(UFO_pos.y + Mathf.PingPong(Time.time, 2)), UFO_pos.z);
     }
 
+    void DestroyUFO()
+    {
+        //ここにSEを止める処理
+
+        Destroy(gameObject);
+    }
 
     public void IDamage()
     {
+        GameObject scoreCanvas = Instantiate(
+            addScoreCanvas,
+            new Vector3(transform.position.x, transform.position.y, -5.0f),
+            Quaternion.identity);
+        scoreCanvas.GetComponent<AnimationDestroy>().setText(addScore);
         GameSystem.Instance.AddScore(addScore);// 値分のスコアを加算
         HP_UFO -= 1;//弾が当たったらHPを1減らす
 

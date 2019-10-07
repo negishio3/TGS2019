@@ -12,6 +12,7 @@ public class StoneFall : MonoBehaviour,i_Objects
     public ParticleSystem Damage;//弾が当たり体力が減った時
     public ParticleSystem explosion;//体力がなくなった時
     int addscore;
+    public GameObject addScoreCanvas;
 
 
     // Start is called before the first frame update
@@ -49,7 +50,7 @@ public class StoneFall : MonoBehaviour,i_Objects
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //Instantiate(Damage, transform.position, transform.rotation);            Instantiate(Damage, transform.position, transform.rotation);
-            this.gameObject.transform.localScale -= new Vector3(transform.localScale.x / 3, transform.localScale.y / 3, transform.localScale.z / 3);
+            transform.localScale -= new Vector3(transform.localScale.x / 3, transform.localScale.y / 3, transform.localScale.z / 3);
 
         }
     }
@@ -58,6 +59,8 @@ public class StoneFall : MonoBehaviour,i_Objects
     public void IDamage()
     {
         GameSystem.Instance.AddScore(addscore);
+        GameObject scoreCanvas = Instantiate(addScoreCanvas,new Vector3(transform.position.x,transform.position.y,-5.0f), Quaternion.identity);
+        scoreCanvas.GetComponent<AnimationDestroy>().setText(addscore);
         HP_fallstone -= 1;
         Instantiate(Damage, transform.position, transform.rotation);//弾が当たったら再生
         this.gameObject.transform.localScale -= new Vector3(this.transform.localScale.x/3,transform.localScale.y/3,transform.localScale.z/3);

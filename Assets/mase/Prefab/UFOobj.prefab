@@ -77,6 +77,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movespeed: 0.05
   HP_UFO: 5
+  item:
+  - {fileID: 7051818259793945983, guid: 9aa8d02b7fe232848a09e5791dcb0fba, type: 3}
+  - {fileID: 7051818259793945983, guid: 1c0fd424e9cb2914381516303f05566e, type: 3}
+  addScoreCanvas: {fileID: 8294293736608578054, guid: 5820eff15a01ffd4d800dd90bf23b25d,
+    type: 3}
 --- !u!1 &574517445846669924
 GameObject:
   m_ObjectHideFlags: 0

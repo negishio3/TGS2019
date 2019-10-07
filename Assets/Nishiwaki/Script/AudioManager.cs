@@ -128,7 +128,10 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
             }
         }
     }
-
+    public void StopSE()
+    {
+        //_seSourceList.IndexOf
+    }
     //=================================================================================
     //BGM
     //=================================================================================

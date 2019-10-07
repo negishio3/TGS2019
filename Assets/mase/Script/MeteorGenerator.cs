@@ -27,7 +27,10 @@ public class MeteorGenerator : SingletonMonoBehaviour<MeteorGenerator>
                 TimeLeft = Random.Range(0.8f, 1.2f);//ランダムで生成する時間の範囲
                 //Debug.Log(TimeLeft);
                 int Meteors = Random.Range(0, MeteorPrefab.Length);//ランダムで選択するよ
-                Instantiate(MeteorPrefab[Meteors], new Vector3(-2.5f + 5 * Random.value, 9, 0), Quaternion.identity);//生成する
+                Instantiate(
+                    MeteorPrefab[Meteors],
+                    new Vector3((Camera.main.ViewportToWorldPoint(Vector3.zero).x+MeteorPrefab[Meteors].transform.localScale.x)* Random.Range(-1.0f,1.0f), 9, 0),
+                    Quaternion.identity);//生成する
                 //Debug.Log("でた");
             }
     }

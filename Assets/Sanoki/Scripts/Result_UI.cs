@@ -9,6 +9,7 @@ public class Result_UI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        AudioManager.Instance.PlaySE(AUDIO.SE_SE_MAOUDAMASHII_EXPLOSION05);
         scoreText = GetComponent<Text>();// 自身のTextコンポーネント取得
 
         SetText();// 表示するテキストを設定

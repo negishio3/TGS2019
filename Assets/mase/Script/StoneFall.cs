@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections;                                       
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ public class StoneFall : MonoBehaviour,i_Objects
     //public float Fall_Max;//落ちる速度の最大
     //public float Fall_Min;//落ちる速度の最小
     float fallSpeed;
-    public int HP_fallstone = 3;//隕石の体力
+    public int HP_fallstone;//隕石の体力
     float rnd;//ランダムの保存先
     public ParticleSystem Damage;//弾が当たり体力が減った時
     public ParticleSystem explosion;//体力がなくなった時

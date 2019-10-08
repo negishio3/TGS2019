@@ -19,7 +19,7 @@ public class Data : MonoBehaviour
 
     public static bool debugFlg = false;// デバッグモード用フラグ
 
-    public static int combo = 0;
+    public static int combo = 0;//コンボ数
 
     // ゲームモードの種類
     public enum ModeType

@@ -31,7 +31,7 @@ public class UFOGenerator : MonoBehaviour
         if (CreateTime <= 0f)
         {
             CreateTime = 15;
-            AudioManager.Instance.PlaySE(AUDIO.SE_UFO01);
+            //AudioManager.Instance.PlaySE(AUDIO.SE_UFO01);
             int Pos = Random.Range(0, 2);
             //Instantiate(UfO_obj, new Vector3(-5f, 5f, 0f), Quaternion.identity);
             MeteorGenerator.Instance.ChangeUFOFlg(true);

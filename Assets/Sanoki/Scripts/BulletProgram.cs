@@ -40,7 +40,7 @@ public class BulletProgram : MonoBehaviour
         {
             // 隕石
             case "Meteo":
-                HP_Bullet--;// 耐久値をマイナス
+                HP_Bullet-=2;// 耐久値をマイナス
                 DestroyEffect(other);
                 if (HP_Bullet == 0) Destroy(gameObject);// 耐久値が0なら削除
                 break;

@@ -31,8 +31,6 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
 
     public GameObject[] debugButtons;// デバッグモード用の隠しボタン
 
-    public GameObject item;
-
     //// ゲームモードのタイプ
     //public enum ModeType
     //{
@@ -61,7 +59,6 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
         if (Input.GetKeyDown(KeyCode.R))// Rキーが押されたら
             GameFinish();
         if(Input.GetKeyDown(KeyCode.G)) sf.SceneChange("Game");// Gキーでゲームリスタート
-        if (Input.GetKeyDown(KeyCode.I)) Instantiate(item, transform.position, Quaternion.identity);
         if (!Data.gamestartFlg||Data.pauseFlg) return;// ゲーム中でないなら以下の処理を飛ばす
     }
 
@@ -71,7 +68,7 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
     /// <param name="addScore">加算するスコア</param>
     public void AddScore(int addScore)
     {
-        Data.score += addScore * (1 + Data.combo/10);// 引数分スコアを加算
+        Data.score += addScore;// 引数分スコアを加算
         scoreText.text ="Score:"+Data.score;// スコアを反映
     }
 
@@ -94,7 +91,8 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
     /// <param name="healValue">回復する値</param>
     public void EarthHeal(int healValue)
     {
-        if(Data.earthHP < Data.EarthMaxHP) Data.earthHP += healValue;// 引数分耐久値を回復
+        if(Data.earthHP<Data.EarthMaxHP)
+             Data.earthHP += healValue;// 引数分耐久値を回復
         // ここに耐久値を回復するアニメーション
         if (Data.earthHP > Data.EarthMaxHP * 0.3)// 耐久値が残り３割に達したら
         {
@@ -176,16 +174,16 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
     {
         Color startColor=new Color(1,1,1,0);// 不透明度 0％
         Color endColor=new Color(1,1,1,0.7f);// 不透明度 70%
-        float t = IsDamage ? 0:1;// 経過時間のリセット
+        float t = IsDamage ? 0 : 1;// 経過時間のリセット
 
-        if (IsDamage && damageImage.color == endColor) yield break;
-        else if (!IsDamage && damageImage.color == startColor) yield break;
+        if (IsDamage && damageImage.color == endColor||
+            !IsDamage&&damageImage.color == startColor) yield break;
 
-        while (IsDamage ?t < 1: t>0)
+        while (IsDamage ? t < 1 : t>0)
         {
             damageImage.color = Color.Lerp(startColor, endColor, t);// 徐々に瀕死用背景を表示
-           if(IsDamage) t += Time.deltaTime;// 時間経過
-           else t -= Time.deltaTime;// 時間経過
+            if(IsDamage)t += Time.deltaTime;// 時間経過
+            else t -= Time.deltaTime;
             yield return null;
         }
 
@@ -284,6 +282,7 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
         Data.score = 0;// スコアをリセット
         scoreText.text = "Score:" + Data.score;//表示をリセット
         Data.earthHP = Data.EarthMaxHP;// 耐久値をリセット
+        Data.combo = 0;
     }
 
     /// <summary>

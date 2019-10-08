@@ -56,7 +56,7 @@ public class UFO : MonoBehaviour,i_Objects
                 if (transform.position.x >= Camera.main.ViewportToWorldPoint(Vector3.one).x + transform.localScale.x)
                 {
                     MeteorGenerator.Instance.ChangeUFOFlg(false);
-                    //StartCoroutine()
+                    Data.combo = 0;
                     DestroyUFO();//自分を消す
                 }
 
@@ -68,7 +68,7 @@ public class UFO : MonoBehaviour,i_Objects
                 if (transform.position.x <= Camera.main.ViewportToWorldPoint(Vector3.zero).x - transform.localScale.x)
                 {
                     MeteorGenerator.Instance.ChangeUFOFlg(false);
-                    //StartCoroutine()
+                    Data.combo = 0;
                     DestroyUFO();//自分を消す
                 }
                 break;
@@ -89,8 +89,6 @@ public class UFO : MonoBehaviour,i_Objects
                     Instantiate(item[1],transform.position, Quaternion.identity);//生成する
                     break;
             }
-
-            GameSystem.Instance.AddScore(150);
             MeteorGenerator.Instance.ChangeUFOFlg(false);
             Data.breakUFOCount++;
 

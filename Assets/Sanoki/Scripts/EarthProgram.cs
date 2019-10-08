@@ -14,6 +14,7 @@ public class EarthProgram : MonoBehaviour
     {
         if (other.tag == "Meteo")// 隕石に触れたら
         {
+            Data.combo = 0;
             GameSystem.Instance.Shake(0.25f, 0.1f);
             Instantiate(explosionEfect, other.transform.position, Quaternion.identity);// エフェクトを生成
             AudioManager.Instance.PlaySE(AUDIO.SE_SE_MAOUDAMASHII_EXPLOSION05);// 爆発のSEを再生

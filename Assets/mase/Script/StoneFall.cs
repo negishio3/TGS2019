@@ -13,12 +13,13 @@ public class StoneFall : MonoBehaviour,i_Objects
     public ParticleSystem explosion;//体力がなくなった時
     int addscore;
     public GameObject addScoreCanvas;
+    public GameObject comboCanvas;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        addscore = 100 / HP_fallstone;
+        addscore = (100 / HP_fallstone) * (1 + Data.combo / 10);
         rnd = Random.value;
         //this.fallSpeed = Fall_Min + Fall_Max * rnd;
         this.fallSpeed = 0.03f + 0.05f * rnd;
@@ -31,28 +32,28 @@ public class StoneFall : MonoBehaviour,i_Objects
         if (Data.pauseFlg) return;
         transform.Translate(0, -fallSpeed, 0, Space.World);
 
-        if (transform.position.y < -3.0f)
-        {
-            Destroy(gameObject);
-            //Debug.Log("きえええええええええええ");
-        }
+        //if (transform.position.y < -3.0f)
+        //{
+        //    Destroy(gameObject);
+        //    //Debug.Log("きえええええええええええ");
+        //}
 
         if (HP_fallstone <= 0)
         {
+            Data.combo++;
             AudioManager.Instance.PlaySE(AUDIO.SE_SE_MAOUDAMASHII_EXPLOSION05);
-            //GameSystem.Instance.AddScore(100);
             Data.breakMeteoCount++;
             Instantiate(explosion, transform.position, transform.rotation);//体力が0になったら再生
-            
+            Instantiate(comboCanvas, new Vector3(transform.position.x, transform.position.y, -6.0f), Quaternion.identity);
             Destroy(gameObject);
             //hpが0になったら消える
         }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //Instantiate(Damage, transform.position, transform.rotation);            Instantiate(Damage, transform.position, transform.rotation);
-            transform.localScale -= new Vector3(transform.localScale.x / 3, transform.localScale.y / 3, transform.localScale.z / 3);
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    //Instantiate(Damage, transform.position, transform.rotation);            Instantiate(Damage, transform.position, transform.rotation);
+        //    transform.localScale -= new Vector3(transform.localScale.x / 3, transform.localScale.y / 3, transform.localScale.z / 3);
 
-        }
+        //}
     }
 
 

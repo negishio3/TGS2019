@@ -1189,6 +1189,11 @@ PrefabInstance:
       propertyPath: gameCanvas
       value: 
       objectReference: {fileID: 1404433987}
+    - target: {fileID: 3575085507630192222, guid: d8ab06efd6c29864693c1948ee96c385,
+        type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 2066398433}
     - target: {fileID: 1418594436636809605, guid: d8ab06efd6c29864693c1948ee96c385,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2166,6 +2171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BreakEfect: {fileID: 904113523, guid: 7a9ade9fc6442e14dba05a829ba875ec, type: 3}
   gameCanvas: {fileID: 1404433987}
+  scoreText: {fileID: 0}
   gameMode: 0
 --- !u!54 &878746538
 Rigidbody:
@@ -2762,8 +2768,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -50, y: 50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -70, y: 70}
+  m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1282228395
 MonoBehaviour:
@@ -4068,6 +4074,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BreakEfect: {fileID: 904113523, guid: 7a9ade9fc6442e14dba05a829ba875ec, type: 3}
   gameCanvas: {fileID: 1404433987}
+  scoreText: {fileID: 0}
   gameMode: 1
 --- !u!54 &1572028268
 Rigidbody:
@@ -5224,6 +5231,11 @@ PrefabInstance:
       propertyPath: gameCanvas
       value: 
       objectReference: {fileID: 1404433987}
+    - target: {fileID: 3575085507630192222, guid: d8ab06efd6c29864693c1948ee96c385,
+        type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 2066398433}
     - target: {fileID: 1418594436636809605, guid: d8ab06efd6c29864693c1948ee96c385,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -23,12 +23,13 @@ public class UFO : MonoBehaviour,i_Objects
     int addScore;
 
     public GameObject addScoreCanvas;
+    public GameObject comboCanvas;
 
         // Start is called before the first frame update
     void Start()
     {
-        addScore = 150 / HP_UFO;//基本値をHPで割った値をスコアとする
-        Debug.Log(Camera.main.ViewportToWorldPoint(Vector3.one).x);
+        addScore = (150 / HP_UFO) * (1 + Data.combo / 10);//基本値をHPで割った値をスコアとする
+
         //UFOのオブジェクトの位置情報を代入
         UFO_pos = this.gameObject.transform.position.y;
         if (transform.position.x >= Vector3.zero.x)
@@ -56,7 +57,7 @@ public class UFO : MonoBehaviour,i_Objects
                 {
                     MeteorGenerator.Instance.ChangeUFOFlg(false);
                     //StartCoroutine()
-                    Destroy(gameObject);//自分を消す
+                    DestroyUFO();//自分を消す
                 }
 
                 break;
@@ -68,7 +69,7 @@ public class UFO : MonoBehaviour,i_Objects
                 {
                     MeteorGenerator.Instance.ChangeUFOFlg(false);
                     //StartCoroutine()
-                    Destroy(gameObject);//自分を消す
+                    DestroyUFO();//自分を消す
                 }
                 break;
             default:
@@ -77,6 +78,8 @@ public class UFO : MonoBehaviour,i_Objects
         }
         if (HP_UFO <= 0)
         {
+            Data.combo++;
+
             switch (Data.GameMode)
             {
                 case Data.ModeType.Endless:
@@ -85,12 +88,14 @@ public class UFO : MonoBehaviour,i_Objects
                 case Data.ModeType.TimeAttack:
                     Instantiate(item[1],transform.position, Quaternion.identity);//生成する
                     break;
-            } 
+            }
+
             GameSystem.Instance.AddScore(150);
             MeteorGenerator.Instance.ChangeUFOFlg(false);
             Data.breakUFOCount++;
-            
-            Destroy(gameObject);//㏋が0になったら消す
+
+            Instantiate(comboCanvas, new Vector3(transform.position.x, transform.position.y, -6.0f), Quaternion.identity);
+            DestroyUFO();//㏋が0になったら消す
         }
         //this.gameObject.transform.position = new Vector3(UFO_pos.x,(UFO_pos.y + Mathf.PingPong(Time.time, 2)), UFO_pos.z);
     }

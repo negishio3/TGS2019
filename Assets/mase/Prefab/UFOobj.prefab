@@ -82,6 +82,8 @@ MonoBehaviour:
   - {fileID: 7051818259793945983, guid: 1c0fd424e9cb2914381516303f05566e, type: 3}
   addScoreCanvas: {fileID: 8294293736608578054, guid: 5820eff15a01ffd4d800dd90bf23b25d,
     type: 3}
+  comboCanvas: {fileID: 598496223343114786, guid: cc6f075d9c5d11141b4bc1ae87dd275a,
+    type: 3}
 --- !u!1 &574517445846669924
 GameObject:
   m_ObjectHideFlags: 0

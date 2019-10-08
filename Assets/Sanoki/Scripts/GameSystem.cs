@@ -71,7 +71,7 @@ public class GameSystem : SingletonMonoBehaviour<GameSystem>
     /// <param name="addScore">加算するスコア</param>
     public void AddScore(int addScore)
     {
-        Data.score += addScore;// 引数分スコアを加算
+        Data.score += addScore * (1 + Data.combo/10);// 引数分スコアを加算
         scoreText.text ="Score:"+Data.score;// スコアを反映
     }
 

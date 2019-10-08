@@ -168,7 +168,7 @@ public class ResultSystem : SingletonMonoBehaviour<ResultSystem>
         Instantiate(fallMeteo[Random.Range(0,2)], fallMeteoPos[rankingCount].position, Quaternion.identity);// 隕石の生成
         Instantiate(resultBullet, new Vector3(// 弾の生成
             GetMeteoBreakPos().x,
-            GetMeteoBreakPos().y - 8.0f,
+            Camera.main.ViewportToWorldPoint(Vector3.zero).y-resultBullet.transform.localScale.y,
             GetMeteoBreakPos().z
             ), Quaternion.identity);
     }
